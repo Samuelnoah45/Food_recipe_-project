@@ -6,7 +6,7 @@ const userStore = useUserStore();
 </script>
 <template>
   <div class="max-w-fit">
-        <div class="grow h-screen flex-none bg-white shadow-lg">
+        <div class="grow  flex-none bg-white shadow-lg">
               <!-- //profile setting -->
              <div  class="flex justify-between p-8">
                  <div class="text-3xl font-serif text-black font-bold">Profile Settings</div>

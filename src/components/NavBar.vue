@@ -65,7 +65,7 @@ function   mobile_dropdown(){
                <router-link to="/login">sign in</router-link>
               </li>
               <li v-if="userInfo.user.active">
-                 <router-link to="/profile">profile</router-link>
+                 <router-link to="/profile"><i class="text-black fa-solid fa-user mr-2"></i><span> My account</span> </router-link>
               </li>
              <li  v-if="userInfo.user.active">
           <router-link @click="logout" to="/login">logout</router-link>
