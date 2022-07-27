@@ -48,7 +48,7 @@ function   mobile_dropdown(){
 
     <div class=" flex  md:justify-evenly justify-between w-full p-2  text-gray-700"  id="mobile-menus">
       <div class="flex  flex-g text-md ">
-      <button><font-awesome-icon icon="fa-solid fa-bars"/> Explore</button>
+      <button><i class="fa-solid fa-bars"></i> Explore</button>
     <div class="ml-6 font-sans font-bold text-xl text-orange-600"><span><router-link to="/">SKYRecipe</router-link></span>
         </div>
       </div>

@@ -43,16 +43,19 @@
             </ul>
         </div>
          <div class="col-start-6   col-end-8 flex justify-start">
-           <div class="flex justify-center   w-full">
-              <div class="text-black text-2xl font-bold font-mono"> Connect
+           <div class=" flex justify-center  w-full">
+             <div>
+              <div class="text-black text-2xl font-bold font-mono"> Connect</div>
+              <div class="space-x-6 text-2xl">
+                <i class="fa-brands fa-facebook hover:text-blue-600"></i> 
+                <i class="fa-brands fa-square-instagram insta"></i>
+                <i class="fa-brands fa-pinterest hover:text-red-600"></i>
               </div>
             </div>
+               </div>
             <div>
-                <font-awesome-icon icon="fa-brands fa-facebook" />
-                <font-awesome-icon icon="fa-brands fa-instagram" />
-                <font-awesome-icon icon="fa-brands fa-pinterest" />
-                <font-awesome-icon icon="fa-brands fa-twitter" />
-            </div>
+
+              </div>
             
         </div>
         <div class="col-span-8 mb-8 flex justify-center">
@@ -69,5 +72,9 @@
 
 
 <style>
+.insta:hover{
+  color: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+  
+}
 
 </style>

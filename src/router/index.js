@@ -4,6 +4,8 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Detail from '../views/FoodDetail.vue'
 import NotFound from '../views/NotFound.vue'
+import Profile from '../views/profile.vue'
+
 
 const routes = [
     {
@@ -31,7 +33,7 @@ const routes = [
      {
         path: '/profile',
         name: 'profile',
-        component: Signup,
+        component: Profile,
         
     }, 
     {

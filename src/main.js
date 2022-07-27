@@ -4,16 +4,23 @@ import App from './App.vue'
 import { apolloClient } from "../apollo/config";
 import router from './router';
 import VueAwesomePaginate from "vue-awesome-paginate";
-import VeeValidate from 'vee-validate';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas);
+import { fab } from '@fortawesome/free-brands-svg-icons';
+library.add(fab);
+import { far } from '@fortawesome/free-regular-svg-icons';
+library.add(far);
+import { dom } from "@fortawesome/fontawesome-svg-core";
+dom.watch();
+
 import fileBase64 from 'vue-file-base64';
 import { createPinia } from 'pinia'
 import "vue-awesome-paginate/dist/style.css";
 import './assets/tailwind.css'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
-import { pin } from 'nodemon/lib/version';
+
 const pinia=createPinia ()
 if (localStorage.getItem("state")) {
   pinia.state.value=JSON.parse(localStorage.getItem("state"))

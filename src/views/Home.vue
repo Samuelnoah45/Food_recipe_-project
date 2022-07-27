@@ -1,6 +1,5 @@
 
-<script setup land="ts">
-// @ is an alias to /src
+<script setup >
 import { ref} from "vue";
 import NavBar from "../components/NavBar.vue";
 import Card from "../components/card.vue";
@@ -10,7 +9,6 @@ import allfoods from "../graphql/query/foods.gql";
 import { useUserStore } from '../store/userInfo'
 const userStore = useUserStore();
 let varibales=ref({id:10})
-
 console.log(userStore.user);
 const { result, onResult, onError, variables,fetchMore } = useQuery(allfoods, () => ({offset:userStore.user.pageNumber*12-12, limit: 12}));
 
@@ -35,14 +33,11 @@ const onClickHandler = (page) =>
           offset:userStore.user.pageNumber*12-12,
         },
          updateQuery: (previousResult, { fetchMoreResult }) => {
-          // No new feed posts
           if (!fetchMoreResult) return previousResult
-          // Concat previous feed with new feed posts
           return {
            
             food: [
               ...fetchMoreResult.food,
-            
             ],
             food_aggregate:fetchMoreResult.food_aggregate
             
@@ -79,8 +74,8 @@ const onClickHandler = (page) =>
               <div class="sreach-box  flex justify-center">
                 <div class="">
                  <input type="text" class="p-2 mr-4  " placeholder="search....">
-                    <span class="icon p-2 text-white bg-orange-700">
-                      <font-awesome-icon  icon="fa-solid fa-magnifying-glass" />
+                    <span class="icon p-2 text-white text-lg bg-orange-700">
+                      <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
                 </div>
                  
