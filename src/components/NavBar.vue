@@ -1,0 +1,129 @@
+ 
+
+<script setup>
+import { ref ,onMounted ,onUpdated} from "vue";
+import authentication from '../../Authentication/cookie';
+import { useUserStore } from '../store/userInfo'
+import { useRouter, useRoute, onBeforeRouteLeave } from 'vue-router'
+
+
+
+ const router = useRouter();
+ const userInfo =useUserStore()
+ const menubar=ref("block")
+ const close=ref("hidden")
+ const show=ref(false)
+ const haveUser=ref(false);
+
+function logout(){
+  userInfo.reset();
+  userInfo.setPage(1)
+  router.push({path:'/login'})
+ 
+  
+}
+
+function   mobile_dropdown(){
+
+   let btn=document.querySelector("#mobile-menus")
+   btn.classList.toggle("hidden")
+   if(menubar.value=="hidden"){
+      menubar.value="block"
+      close.value="hidden"
+   }
+   else{
+        close.value="block"
+        menubar.value="hidden"
+   }
+   
+
+
+   }
+
+</script>
+
+<template>
+  <div class="fixed z-20 w-full app_nav">
+<nav class=" bg-white border-gray-300 px-2 sm:px-4 py-2.5  shadow-lg ">
+
+    <div class=" flex  md:justify-evenly justify-between w-full p-2  text-gray-700"  id="mobile-menus">
+      <div class="flex  flex-g text-md ">
+      <button><font-awesome-icon icon="fa-solid fa-bars"/> Explore</button>
+    <div class="ml-6 font-sans font-bold text-xl text-orange-600"><span><router-link to="/">SKYRecipe</router-link></span>
+        </div>
+      </div>
+         <div>
+            <ul class="flex align-middle space-x-4 ">
+            
+              <li>
+               
+              </li>
+              <li v-if="!userInfo.user.active">
+                  <router-link to="/signup">sign up</router-link>
+              </li>
+              <li  v-if="!userInfo.user.active">
+               <router-link to="/login">sign in</router-link>
+              </li>
+              <li v-if="userInfo.user.active">
+                 <router-link to="/profile">profile</router-link>
+              </li>
+             <li  v-if="userInfo.user.active">
+          <router-link @click="logout" to="/login">logout</router-link>
+        </li> 
+      </ul>
+      </div>
+    </div>
+
+</nav>
+<router-view></router-view>
+  </div>
+</template>
+
+<style scoped>
+.sreach-box{
+ 
+ cursor: pointer;
+
+}
+.sreach-box:hover >input {
+width: 200px;
+padding:0 10px;
+
+}
+.sreach-box:hover > .icon{
+background: none;
+
+
+}
+.icon:hover{
+transform: rotate(360deg) scale(1);
+
+}
+input{
+width: 0;
+border-radius: 20px;
+outline: none;
+padding: 0;
+margin: 0 10px;
+background: white;
+font-size: 1.1rem;
+transition: 0.5s ease;
+line-height: 40px;
+color:  #42b983;;
+}
+
+.icon{
+color: #42b983;
+float: right;
+width:none;
+font-size: 1.5rem;
+height: 30px;
+display: flex;
+justify-content: center;
+transition: 0.4s;
+/* cursor: pointer; */
+text-decoration: none;
+
+}
+</style>>
+

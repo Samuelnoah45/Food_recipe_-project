@@ -1,0 +1,8 @@
+ query ($emails: String!,$password:String!) {
+  signin(email: $emails,password:$password) {
+    numOfposts
+    email
+    name
+    token
+  }
+}

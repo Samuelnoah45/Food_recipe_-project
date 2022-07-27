@@ -1,0 +1,18 @@
+query food($offset: Int, $limit: Int) {
+  food(offset:$offset, limit:$limit) {
+    id
+    category
+    title
+    duration
+    ratings {
+      totalRating
+      numberOfRating
+    }
+  }
+   food_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+

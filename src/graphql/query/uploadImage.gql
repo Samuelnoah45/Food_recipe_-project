@@ -1,0 +1,5 @@
+query($image:[String!]) {
+  uploadImage(base64String:$image){
+    url
+  }
+}

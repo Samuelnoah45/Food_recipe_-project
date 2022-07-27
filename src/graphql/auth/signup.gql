@@ -1,0 +1,6 @@
+query($email: String!, $password: String!, $name: String!) {
+ Signup(email:$email,password:$password,name:$name){
+  name
+  email
+  token
+}}

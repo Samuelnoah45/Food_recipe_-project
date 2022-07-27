@@ -1,0 +1,5 @@
+mutation delet($id:Int){  
+  delete_food(where: {id: {_eq: $id}}){
+    affected_rows
+  }
+}
