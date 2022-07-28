@@ -1,10 +1,20 @@
 <script setup>
 import { ref } from 'vue'
+import insertIngredient from '../graphql/mutation/insertIngredient.gql';
+import { useMutation } from '@vue/apollo-composable';
+
+
+const { mutate:insertIng } = useMutation(insertIngredient,() => ({
+  variables: {
+    object: ingredients.value,
+  },
+}))
 
 const ingredients = ref([{
-   Name: "",
-   amount:0,
-   unit:""
+       amount: 0,
+       food_id:23,
+       ingredient_name: "",
+       unit: ""
 }])
 
 const steps = ref([{
@@ -24,9 +34,10 @@ const addMore = () =>{
       ingredients.value[ingredients.value.length - 1].unit != "" &&
       ingredients.value[ingredients.value.length - 1].amount != 0) {
       ingredients.value.push({
-         Name: "",
          amount: 0,
-         unit:""
+         food_id:23,
+         ingredient_name: "",
+         unit: ""
       });
       IngError.value = false;}
    else {
@@ -69,12 +80,9 @@ const removeStep = (index) =>
     }
   
 const submit = () =>
-{  console.log("msxkn");
-   console.log(title.value);
-   console.log(description.value);
-   console.log(Duration.value);
-   console.log(category.value);
-   console.log(steps.value);
+
+{ 
+    insertIng()
    console.log(ingredients.value);
 }
 
@@ -151,7 +159,7 @@ const submit = () =>
                <div class="" v-for="(ingredient, index) in ingredients" :key="index">
                <div class="flex justify-evenly ml-2 mt-4">
                   <input
-                     v-model="ingredient.Name"
+                     v-model="ingredient.ingredient_name"
                      type="text"
                      placeholder="Ingrident Name"
                      class=" p-2 border border-gray-500 rounded"
