@@ -17,7 +17,8 @@ onResult(({ data }) =>
 {
  total =result.value.food_aggregate.aggregate.count;
 const itemPerPage = 5;
-console.log(total)
+  console.log(result.value)
+   
  
     
    });

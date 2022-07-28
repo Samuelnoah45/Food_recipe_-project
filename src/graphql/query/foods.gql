@@ -1,22 +1,30 @@
-query food($offset: Int, $limit: Int) {
+query food($offset: Int, $limit: Int)  {
   food(offset:$offset, limit:$limit) {
     id
     category
     title
     duration
-    ratings {
-      totalRating
-      numberOfRating
-    }
     user{
       name
     }
+    reviews_aggregate{
+      aggregate{
+        avg {
+          rating
+          
+        }
+      }
+      
+    }
+    
   }
+  
    food_aggregate {
     aggregate {
       count
     }
   }
 }
+
 
 

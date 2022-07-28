@@ -13,9 +13,8 @@ defineProps({
 
 <template>
   <div class="md:grid-cols-3 md:grid">
- 
+      
     <div v-for="food in result.food" :key="food" class="p-1 ="  >
-    
       <div  class="md:block grid grid-cols-3 bg-white  rounded-b-lg m-4 shadow-xl bg-gray-">
         <div class=" w-full max-h-48 max-w-lg   h-64 rounded-lg shadow-2xl overflow-hidden relative">
           <img class="absolute inset-0 min-h-full object-cover " src="../assets/images/homepage.jpg" alt="" />
@@ -39,14 +38,24 @@ defineProps({
            </span>
         </div>
          <div class="text-left text-lg flex flex-col ">
-           <div class="text-left text-sm text-orange-600 my-2 px-2 " :set="(averageRate =food.ratings[0].totalRating / food.ratings[0].numberOfRating)" >
+           <div class="text-left text-sm text-orange-600 my-2 px-2 " :set="(averageRate =food.reviews_aggregate.aggregate.avg.rating)" >
+               
                <span class="text-gray-500 pr-2">Rating</span >
+               <div v-if="averageRate">
                  <span  v-for="n in 5" :key="n">
                    <i class="fa-solid fa-star" v-if="n <= averageRate" ></i>
                    <!-- <font-awesome-icon icon="fa-solid fa-star"  /> -->
-                   <i class="fa-solid fa-star-half-stroke" v-if=" averageRate < 5 && averageRate - n < 1 && averageRate > n"></i>
- 
+                   <!-- <i class="fa-solid fa-star-half-stroke" v-else-if=" averageRate < 5 && averageRate - n <1 && averageRate > n"></i> -->
+                   <i class="fa-solid fa-star-half-stroke" v-else-if="n-averageRate < 1 && n- averageRate >0"></i>
+                   <i class="fa-regular fa-star" v-else-if="n-averageRate"></i>
+                   <!-- <i class="fa-solid fa-star-half-stroke" ></i> -->
                  </span>
+              </div>
+              <div v-else> 
+              <span  v-for="n in 5" :key="n">
+                   <i class="fa-regular fa-star"></i>
+              </span>
+              </div>
             </div>
            <div class="self-end mb-2"><p class="text-sm px-2 ">created by <span class="font-serif font-bold">{{food.user.name}}</span></p></div>
 

@@ -36,13 +36,13 @@ const uploadImage = async (req, res) => {
 
     // success
     return res.json({
-      url:"sky",
+      urls
     });
   } catch (error) {
     console.error(error);
 
       return res.json({
-      url:"",
+      urls,
     });
 
 

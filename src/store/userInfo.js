@@ -6,8 +6,12 @@ export const useUserStore = defineStore('userStore', {
             name: "",
             email: "",
             active:false,
-            pageNumber:1
+           pageNumber: 1,
+            userId:null
           },
+      profile: {
+          
+        }
         }
   },
     getters: {
@@ -20,6 +24,7 @@ export const useUserStore = defineStore('userStore', {
           this.user.email = data.email;
           this.user.name = data.name;
           this.user.active = true;
+          this.user.userId=data.userId
           this.user.pageNumber=1
       
     },

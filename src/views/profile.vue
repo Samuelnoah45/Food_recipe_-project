@@ -48,18 +48,12 @@ let activeBtn=ref('btn1')
             <span class="text-2xl self-center"><i class="fa-brands fa-gratipay"></i></span>
             <span class="md:text-lg min-w-full text-xs">favorite</span>
          </button>
-         <div id="toolBtns">
-<div class="btn-group" role="group" id="toolBtns">
-  <button class="btn" type="button" @click="activeBtn = 'btn1'" :class="{active: activeBtn === 'btn1' }">Btn1</button>
-  <button class="btn" type="button" @click="activeBtn = 'btn2'" :class="{active: activeBtn === 'btn2' }">Btn2</button>
-  <button class="btn" type="button" @click="activeBtn = 'btn3'" :class="{active: activeBtn === 'btn3' }">Btn3</button></div>
-</div>
+   
     </div> 
      
         </div>
          <div class=" grow min-w-ful bg-white ">
-          <!-- <ProfileSetting class="min-w-full"></ProfileSetting>     -->
-          <!-- <AddRecipe class="min-w-full"></AddRecipe> -->
+        
           <component class="min-w-full" :is="comp" />
          
 

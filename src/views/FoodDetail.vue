@@ -12,7 +12,7 @@ const variables=ref({
 
 const queryOptions=ref({enabled:false})
 const {result,onResult,onError,loading} = useQuery(upload, variables,queryOptions);
-  const passit = onResult((result) =>
+const passit = onResult((result) =>
    {console.log(result.loading)
     console.log(result)
     
@@ -29,11 +29,15 @@ const {result,onResult,onError,loading} = useQuery(upload, variables,queryOption
      }
    
 
- })
+  })
+
+ 
 const handleImage = async () =>
 {   
-   const files   = document.querySelector('input[type=file]').files;
-   let images=[]
+  const files = document.querySelector('#uploadpic').files;
+   console.log(files)
+  let images = []
+   
  async function readAndPreview(file) {
 
     // Make sure `file.name` matches our extensions criteria
@@ -62,9 +66,11 @@ const handleImage = async () =>
 const post = () =>
 {
 
-       console.log(variables.value.image);
+       
         queryOptions.value.enabled = true
 }
+
+
 
 const creatBase64Image =  (fileObject) =>
 {
@@ -102,9 +108,9 @@ reader.readAsDataURL(fileObject);
      <div class="card bg-slate-100">
        <img :src="images" alt="">
        <form  v-on:submit.prevent="post">
-        <input @change="handleImage" ref="file"  type="file" accept="image/*" multiple name="" id="">
+        <input @change="handleImage" ref="file"  type="file" accept="image/*" multiple name="" id="uploadpic">
         <input type="submit">
-     </form>
+      </form>
      <div>
        <h1 v-if="loading">loading......</h1>
       <h1  v-else >Done!!! </h1>

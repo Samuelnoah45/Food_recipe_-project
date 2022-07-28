@@ -1,0 +1,5 @@
+mutation insert_food($object: food_insert_input!) {
+  insert_food_one(object:$object){
+         id
+  }
+}

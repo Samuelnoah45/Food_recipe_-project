@@ -7,7 +7,7 @@ const loginHandler = async (req, res) => {
   // get request input
   const credientials = req.body.input;
   const email = credientials.email;
- 
+
   let GET_USER = gql`
   query ($email: String!) {
     users(where: {email: {_eq: $email}}) {
@@ -15,11 +15,7 @@ const loginHandler = async (req, res) => {
       name
       email
       password
-    food_aggregate {
-      aggregate {
-        count
-      }
-    }
+     
     }}
   
   `;
@@ -60,10 +56,10 @@ const loginHandler = async (req, res) => {
 console.log(token);
   // success
   return res.json({ 
-    numOfposts:user.food_aggregate.aggregate.count,
     email: user.email,
     name: user.name,
     token: token,
+    userId:user.id
   });
 
   }
@@ -75,6 +71,7 @@ return res.json({
     email:"",
     name: "",
     token: "",
+    userId:null
 })
     }
 
@@ -87,6 +84,7 @@ return res.json({
     email:"",
     name: "",
     token: "",
+    userId:null
 })
 
 }
