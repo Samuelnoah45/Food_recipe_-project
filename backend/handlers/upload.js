@@ -42,7 +42,7 @@ const uploadImage = async (req, res) => {
     console.error(error);
 
       return res.json({
-      urls,
+      urls:[],
     });
 
 

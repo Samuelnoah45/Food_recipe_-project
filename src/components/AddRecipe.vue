@@ -1,23 +1,27 @@
 <script setup>
 import { ref } from 'vue'
-import insertIngredient from '../graphql/mutation/insertIngredient.gql';
+import insertFoodinfo from '../graphql/mutation/insertFoodDitail.gql';
 import { useMutation } from '@vue/apollo-composable';
 import { useQuery } from '@vue/apollo-composable';
 import upload from '../graphql/query/uploadImage.gql'
+import AddFood from '../graphql/mutation/insertFood.gql'
 import { useUserStore } from '../store/userInfo'
 const userStore = useUserStore();
+
+//object to store  ingredients of foods
 const ingredients = ref([{
        amount: 0,
-       food_id:23,
+       food_id:null,
        ingredient_name: "",
        unit: ""
 }])
+
 const steps = ref([{
-   step: 1,
-   instuction:"",
+   stepNumber: 1,
+   instuction: "",
+   food_id:null
  
 }])
-const images=ref([])
 const food = ref({
       title: "",
       category: "",
@@ -25,27 +29,33 @@ const food = ref({
       duration: 0,
       user_id: userStore.user.userId
        })
-
-
-const variables=ref({image:[],});
+const Food_id=ref()
+const images=ref([])
+const variables = ref({ image: [], });
+const urls=ref([])
 const imgsrc= ref('../assets/images/default.jpg')
 const IngError=ref(false)
 const StepError = ref(false)
 const queryOptions = ref({ enabled: false })
-//insertion for food
-const {mutate:insertFood} =useMutation()
+
+
 //insertion for Ingredient
-const { mutate:insertIng } = useMutation(insertIngredient,() => ({
+const { mutate:insertAll } = useMutation(insertFoodinfo,() => ({
   variables: {
-    object: ingredients.value,
+    object1: ingredients.value,
+    object2: steps.value,
+    object3: urls.value,
+  },
+}))
+
+//insertion for food
+const { mutate:insertFood ,onDone} = useMutation(AddFood,() => ({
+  variables: {
+    object: food.value,
   },
 }))
 
 //upload image
-
-
-
-
 const {result,onResult,onError,loading} = useQuery(upload, variables,queryOptions);
 const passit = onResult((result) =>
    {console.log(result.loading)
@@ -56,12 +66,16 @@ const passit = onResult((result) =>
      }
 
      else {
+     
+        for (let i = 0; i < result.data.uploadImage.urls;i++)  
+           urls.value.push({
+              food_id: Food_id.value,
+               urls:result.data.uploadImage.urls[i]
+           })
+       console.log("mcmec")
+      //Inset 3 tables data at one query 
+        insertAll();
 
-           
-   console.log(result.data.uploadImage.urls)
-
-      
-       
      }
    
 
@@ -74,48 +88,52 @@ onError(() =>
    
 })
 
-const addMore = () =>{
-   if (ingredients.value[ingredients.value.length - 1].ingredient_name != "" &&
+const addMore = () =>
+{
+   if(ingredients.value[ingredients.value.length - 1].ingredient_name != "" &&
       ingredients.value[ingredients.value.length - 1].unit != "" &&
-      ingredients.value[ingredients.value.length - 1].amount != 0) {
-      ingredients.value.push({
+      ingredients.value[ingredients.value.length - 1].amount != 0)
+   {
+      ingredients.value.push(
+      {
          amount: 0,
          food_id:23,
          ingredient_name: "",
          unit: ""
       });
-      IngError.value = false;}
-   else {
-      IngError.value = true;
-       
-     }
-       
-
-
-    }
+      IngError.value = false;
+   }
+   else
+   {
+   IngError.value = true;  
+   }
+}
 const remove = (index) =>
 {
-   if (ingredients.value.length > 1) {
+   if (ingredients.value.length > 1)
+   {
       ingredients.value.splice(index, 1);
         
-     }
-    }
+   }
+}
 
 
   const addMoreStep = () =>
  {
-   if (steps.value[steps.value.length - 1].instuction!= "") {
-      steps.value.push({
+     if (steps.value[steps.value.length - 1].instuction != "")
+      {
+          steps.value.push({
          step:steps.value.length+1,
          instuction: "",
       });
       console.log(steps.value)
       StepError.value = false;  
-   }
-   else {
+      }
+     else
+     {
       StepError.value = true  
-   }
-  }
+     }
+}
 
 const removeStep = (index) =>
 {
@@ -127,15 +145,37 @@ const removeStep = (index) =>
 const submit = () =>
 
 { 
-       
-      //   queryOptions.value.enabled = true
-          insertFood();
-      
+   
   if (steps.value[steps.value.length - 1].instuction != "") {
      if(ingredients.value[ingredients.value.length - 1].ingredient_name != "" &&
       ingredients.value[ingredients.value.length - 1].unit != "" &&
       ingredients.value[ingredients.value.length - 1].amount != 0) {
-      IngError.value = false;
+        IngError.value = false;
+         
+        insertFood();
+        onDone(result =>
+        {    
+           Food_id.value = result.data.insert_food_one.id
+           console.log(Food_id);
+           console.log(steps.value.length);
+           console.log(ingredients.value.length);
+
+
+           for (let i = 0; i <steps.value.length ; i++){
+              steps.value[i].food_id = Food_id;
+              
+              
+           }
+          for (let i = 0; i < ingredients.value.length; i++){
+              ingredients.value[i].food_id = Food_id;
+               
+          }
+            queryOptions.value.enabled = true
+
+        })
+        
+
+         
       // insertIng();
      }
       else {
@@ -151,7 +191,7 @@ const submit = () =>
 
 }
 
-
+//image  to based64 
 const handleImage = async () =>
 {   
    const files = document.querySelector('input[type=file]').files;

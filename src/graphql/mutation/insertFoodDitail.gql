@@ -1,0 +1,13 @@
+mutation insert_step_and_ingr($object1:[Ingredients_insert_input!]!,
+$object2: [steps_insert_input!]!,
+$object3: [images_insert_input!]!) {
+  insert_Ingredients(objects:$object1){
+    affected_rows
+  }
+  insert_steps(objects:$object2){
+    affected_rows
+  }
+  insert_images(objects:$object3){
+    affected_rows
+  }
+}

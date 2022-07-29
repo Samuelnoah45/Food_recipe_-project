@@ -1,5 +1,0 @@
-mutation insert_Ingredients($object:[Ingredients_insert_input!]!) {
-  insert_Ingredients(objects:$object){
-    affected_rows
-  }
-}
