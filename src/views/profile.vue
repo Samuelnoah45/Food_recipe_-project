@@ -3,15 +3,24 @@ import NavBar from '../components/NavBar.vue'
 import Edit from '../components/ProfileSetting.vue'
 import Footer from '../components/Footer.vue'
 import AddRecipe from '../components/AddRecipe.vue'
-import { ref } from 'vue'
-let comp = ref(Edit)
-let activeBtn=ref('btn1')
+import { useUserStore } from '../store/userInfo'
+import { ref ,shallowRef} from 'vue'
+const userStore =useUserStore()
+console.log(userStore.user);
+let comp = shallowRef()
+
+if (userStore.profile.active == "btn1") {
+   comp.value=Edit
+}
+else if(userStore.profile.active == "btn3") {
+   comp.value=AddRecipe
+}
 
 </script>
 <template>
    <div class="">
     <NavBar></NavBar>
-    <div class="flex min-w-full justify-center pt-32 mb-8">
+    <div class="flex  justify-center pt-32 mb-8">
        <div  class="profile   md:flex-row  flex flex-col"> 
        <div class="md:mr-8 m-0   bg-white shadow-lg  md:self-start md:pb-36 pb-2">
          <div class="grid grid-cols-3 pt-2 ">
@@ -22,31 +31,32 @@ let activeBtn=ref('btn1')
                Hi @samuel45
             </div>
          </div>
-  <div class="md:block  flex justify-evenly  ">
-        <button @click="comp=Edit ,activeBtn = 'btn1'" :class="{active: activeBtn === 'btn1' }" class="md:text-lg min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
+  <div class="md:block flex justify-evenly ">
+        <button @click="comp=Edit ,userStore.setActiveBtn('btn1') " :class="{active: userStore.profile.active === 'btn1' }" 
+        class="md:text-lg md:min-w-full  md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
             <span class="text-2xl self-center"><i class="fa-solid fa-user-pen"></i></span>
-            <span class="md:text-lg min-w-full text-xs">Edit account</span>
+            <span class="md:text-lg md:min-w-full text-xs">Edit account</span>
          </button>
-          <button @click="comp=Recipes ,activeBtn = 'btn2'" :class="{active: activeBtn === 'btn2' }" class="md:text-lg min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
-            <span class="text-2xl self-center"><i class="fa-solid fa-gear"></i></span>
-            <span class="md:text-lg min-w-full text-xs">My Recipes</span>
+          <button @click="userStore.setActiveBtn('btn2')" :class="{active:  userStore.profile.active === 'btn2' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
+            <span class="text-2xl self-center"><i class="fa-solid fa-utensils"></i></span>
+            <span class="md:text-lg md:min-w-full text-xs">My Recipes</span>
          </button>
-         <button  @click="comp=AddRecipe ,activeBtn = 'btn3'" :class="{active: activeBtn === 'btn3' }" class="md:text-lg min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
+         <button  @click="comp=AddRecipe, userStore.setActiveBtn('btn3')" :class="{active: userStore.profile.active === 'btn3' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
             <span class="text-2xl self-center"><i class="fa-solid fa-plus"></i></span>
-           <span class="md:text-lg min-w-full text-xs">Add Recipe</span>
+           <span class="md:text-lg md:min-w-full text-xs">Add Recipe</span>
          </button>
-          <button @click="comp=Bookmark,activeBtn = 'btn4'" :class="{active: activeBtn === 'btn4' }" class="md:text-lg min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
+          <button @click="comp=AddRecipe, userStore.setActiveBtn('btn4')" :class="{active:  userStore.profile.active === 'btn4' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
             <span class="text-2xl self-center"><i class="fa-solid fa-bookmark"></i></span>
-            <span class="md:text-lg min-w-full text-xs">Bookmark</span>
+            <span class="md:text-lg md:min-w-full text-xs">Bookmark</span>
          </button>
           
-         <button @click="comp=Notfication,activeBtn = 'btn5'" :class="{active: activeBtn === 'btn5' }" class="md:text-lg min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
+         <button @click="comp=AddRecipe ,userStore.setActiveBtn('btn5')" :class="{active: userStore.profile.active=== 'btn5' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
             <span class="text-2xl self-center"><i class="fa-solid fa-bell"></i></span>
-            <span class="md:text-lg min-w-full text-xs">Notfication</span>
+            <span class="md:text-lg md:min-w-full text-xs">Notfication</span>
          </button>
-         <button @click="comp=favorite ,activeBtn = 'btn6'" :class="{active: activeBtn === 'btn6' }"  class="md:text-lg min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
+         <button @click="comp=AddRecipe,userStore.setActiveBtn('btn6')" :class="{active: activeBtn === 'btn6' }"  class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600"  to="">
             <span class="text-2xl self-center"><i class="fa-brands fa-gratipay"></i></span>
-            <span class="md:text-lg min-w-full text-xs">favorite</span>
+            <span class="md:text-lg md:min-w-full text-xs">favorite</span>
          </button>
    
     </div> 

@@ -10,7 +10,7 @@ import { useUserStore } from '../store/userInfo'
 const userStore = useUserStore();
 let varibales=ref({id:10})
 console.log(userStore.user);
-const { result, onResult, onError, variables,fetchMore } = useQuery(allfoods, () => ({offset:userStore.user.pageNumber*12-12, limit: 12}));
+const { result, onResult,loading, onError, variables,fetchMore } = useQuery(allfoods, () => ({offset:userStore.user.pageNumber*12-12, limit: 12}));
 
 let total;
 onResult(({ data }) =>
@@ -110,15 +110,17 @@ const onClickHandler = (page) =>
               </div>
 
       </div>
-    <div  v-if="result" class="flex flex-col  items-center w-full">
+    <div class="flex flex-col  items-center w-full">
       
-
+      
       <div class="grid grid-cols-1 md:grid-cols-7  w-full">
-        <Card  :result="result" class="flex flex-col  m-8 md:col-start-2 md:col-end-6 flex-wrap ">{{result}}</Card>
+        
+    <div class="min-h-full bg-black" v-if="loading">3 rnin</div>
+    <Card  v-else  :result="result" class="flex flex-col  m-8 md:col-start-2 md:col-end-6 flex-wrap "></Card>
       </div>
       <div>
   <vue-awesome-paginate class="self-center m-4 mt-6"
-    :total-items="result.food_aggregate.aggregate.count"
+    :total-items="34"
     :items-per-page="3"
     :max-pages-shown="7"
     :current-page="userStore.user.pageNumber"

@@ -1,17 +1,22 @@
 import { defineStore } from 'pinia'
+import { set } from 'pinia/node_modules/vue-demi';
 export const useUserStore = defineStore('userStore', {
   state() {
     return {
-        user: {
-            name: "",
-            email: "",
-            active:false,
-           pageNumber: 1,
-            userId:null
-          },
+      user: {
+          name: "",
+          email: "",
+          active:false,
+          pageNumber: 1,
+          userId: null,
+         
+      },
       profile: {
-          
-        }
+        active:"btn1"
+      }
+
+     
+       
         }
   },
     getters: {
@@ -39,7 +44,12 @@ export const useUserStore = defineStore('userStore', {
           this.user.name = "";
           this.user.active = false;
 
-     }
+    },
+    setActiveBtn(btn)
+    {
+      this.profile.active=btn
+
+    }
     
   }
 })

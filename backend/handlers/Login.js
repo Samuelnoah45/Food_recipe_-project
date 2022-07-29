@@ -67,24 +67,24 @@ console.log(token);
   else {
     
 return res.json({
-    numOfposts:"",
+    
     email:"",
     name: "",
     token: "",
-    userId:null
+    userId:-1
 })
     }
 
   }
 
+  else {
+    
 
-else{
 return res.json({
-    numOfposts:"",
-    email:"",
+    email: "",
     name: "",
     token: "",
-    userId:null
+    userId:-1
 })
 
 }

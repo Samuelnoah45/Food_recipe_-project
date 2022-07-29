@@ -9,6 +9,7 @@ import { useUserStore } from '../store/userInfo'
 const userStore = useUserStore();
 
 //object to store  ingredients of foods
+
 const ingredients = ref([{
        amount: 0,
        food_id:null,
@@ -18,17 +19,19 @@ const ingredients = ref([{
 
 const steps = ref([{
    stepNumber: 1,
-   instuction: "",
+   instruction: "",
    food_id:null
  
 }])
+
 const food = ref({
       title: "",
       category: "",
       description: "",
       duration: 0,
       user_id: userStore.user.userId
-       })
+})
+       
 const Food_id=ref()
 const images=ref([])
 const variables = ref({ image: [], });
@@ -66,15 +69,20 @@ const passit = onResult((result) =>
      }
 
      else {
-     
-        for (let i = 0; i < result.data.uploadImage.urls;i++)  
+       console.log(result.data.uploadImage.urls.length)
+        for (let i = 0; i < result.data.uploadImage.urls.length;i++)  
            urls.value.push({
               food_id: Food_id.value,
-               urls:result.data.uploadImage.urls[i]
+               url:result.data.uploadImage.urls[i]
            })
        console.log("mcmec")
       //Inset 3 tables data at one query 
+        console.log(urls)
+        console.log(food)
+        console.log(ingredients)
+        console.log(steps)
         insertAll();
+
 
      }
    
@@ -120,11 +128,11 @@ const remove = (index) =>
 
   const addMoreStep = () =>
  {
-     if (steps.value[steps.value.length - 1].instuction != "")
+     if (steps.value[steps.value.length - 1].instruction != "")
       {
-          steps.value.push({
-         step:steps.value.length+1,
-         instuction: "",
+         steps.value.push({
+         stepNumber:steps.value.length+1,
+         instruction: "",
       });
       console.log(steps.value)
       StepError.value = false;  
@@ -146,7 +154,7 @@ const submit = () =>
 
 { 
    
-  if (steps.value[steps.value.length - 1].instuction != "") {
+  if (steps.value[steps.value.length - 1].instruction != "") {
      if(ingredients.value[ingredients.value.length - 1].ingredient_name != "" &&
       ingredients.value[ingredients.value.length - 1].unit != "" &&
       ingredients.value[ingredients.value.length - 1].amount != 0) {
@@ -380,7 +388,7 @@ const post = () =>
           # step {{index+1}}
          <div class="flex justify-evenly ml-1 mt-1">
             <textarea
-               v-model="step.instuction"
+               v-model="step.instruction"
                placeholder="Step instrunction"
                class=" p-1 border border-gray-500 rounded flex-1 m-1"
                ></textarea>

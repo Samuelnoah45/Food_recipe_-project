@@ -10,7 +10,7 @@
       <div class="md:grid md:grid-cols-8  p-7 bg-slate-100">
         <div class="col-span-8 flex justify-center mb-8">
             <span class="text-4xl font-extrabold  text-orange-600 font-serif">
-                 SKYRecipe <font-awesome-icon class="pl-2" icon="fa-solid fa-utensils" />
+                 SKYRecipe <i class="fa-solid fa-utensils"></i>
 
             </span>
         </div>
