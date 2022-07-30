@@ -91,23 +91,23 @@ window.onscroll = () => {
                <div class="flex space-x-3 pr-9 justify-start col-span-1 md:col-span-2 overflow-scroll  scrollbar-hide">
               <router-link to="">
                  <img class="w-20 h-20 object-fill rounded-full" src="../assets/images/homepage.jpg" alt="">
-                   ingriaint
+                   Ingrident
               </router-link>
                  <router-link to="">
                  <img class="w-20 h-20 object-fill rounded-full" src="../assets/images/homepage.jpg" alt="">
-                   ingriaint
+                   Ingrident
               </router-link>  <router-link to="">
                  <img class="w-20 h-20 object-fill rounded-full" src="../assets/images/homepage.jpg" alt="">
-                   ingriaint
+                   Ingrident
               </router-link>  <router-link to="">
                  <img class="w-20 h-20 object-fill rounded-full" src="../assets/images/homepage.jpg" alt="">
-                   ingriaint
+                   Ingrident
               </router-link>  <router-link to="">
                  <img class="w-20 h-20 object-fill rounded-full" src="../assets/images/homepage.jpg" alt="">
-                   ingriaint
+                   Ingrident
               </router-link>  <router-link to="">
                  <img class="w-20 h-20 object-fill rounded-full" src="../assets/images/homepage.jpg" alt="">
-                   ingriaint
+                   Ingrident
               </router-link>
               </div>
 
