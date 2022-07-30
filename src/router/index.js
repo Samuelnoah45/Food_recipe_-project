@@ -5,6 +5,7 @@ import Signup from '../views/Signup.vue'
 import Detail from '../views/FoodDetail.vue'
 import NotFound from '../views/NotFound.vue'
 import Profile from '../views/profile.vue'
+import  check from '../../Authentication/cookie';
 
 
 const routes = [
@@ -46,6 +47,36 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+})
+
+router.beforeEach(async (to, from) =>
+{
+    const user = JSON.parse(localStorage.getItem("state"))
+ const  Authenticated=user.userStore.user.active;
+  if (
+    // make sure the user is authenticated
+      
+      !Authenticated &&
+      to.name !== 'Login' &&
+      to.name !== 'Signup' &&
+      to.name !== 'detail' &&
+      to.name !== 'Home'
+  ) {
+    // redirect the user to the login page
+    return { name: 'Login' }
+  }
+    
+    if (
+    // make sure the user is authenticated
+      
+      Authenticated &&
+      to.name == 'Login' ||
+      to.name == 'Signup' 
+     
+  ) {
+    // redirect the user to the login page
+    return { name:'profile' }
+  }
 })
 
 export default router

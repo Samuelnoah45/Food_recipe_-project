@@ -1,0 +1,38 @@
+query detail($id: Int) {
+  food(where: {id: {_eq: $id}}) {
+    title
+    duration
+    description
+    category
+    user {
+      name
+    }
+    images {
+      url
+    }
+    steps(order_by: {stepNumber: asc}) {
+      instruction
+    }
+    reviews(limit: 1, offset: 0) {
+      review
+    }
+    reviews_aggregate {
+      aggregate {
+        count(columns: created_at)
+        avg {
+          rating
+        }
+      }
+    }
+    Ingredients {
+      amount
+      ingredient_name
+      unit
+    }
+    Ingredients_aggregate {
+      aggregate {
+        count(columns: Ingredient_id)
+      }
+    }
+  }
+}

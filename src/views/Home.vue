@@ -7,7 +7,11 @@ import Footer from '../components/Footer.vue'
 import { useQuery,useMutation} from "@vue/apollo-composable";
 import allfoods from "../graphql/query/foods.gql";
 import { useUserStore } from '../store/userInfo'
+import {onBeforeRouteLeave  ,useRouter} from  'vue-router'
 const userStore = useUserStore();
+const router = useRouter();
+
+
 let varibales=ref({id:10})
 console.log(userStore.user);
 const { result, onResult,loading, onError, variables,fetchMore } = useQuery(allfoods, () => ({offset:userStore.user.pageNumber*12-12, limit: 12}));
@@ -52,19 +56,10 @@ const onClickHandler = (page) =>
 };
 
   
-// const { onDone, mutate: delet } = useMutation(deletFood,() => ({
-//   variables: {
-//      id:13
-//   }
-
-// }))
-// onDone(result =>
-// {
-// console.log(result)
-        
-//  })
-
-
+onBeforeRouteLeave((to, from) => {
+  userStore.setPage(1);
+    
+    })
 
 
 </script>
