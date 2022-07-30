@@ -70,8 +70,18 @@ router.beforeEach(async (to, from) =>
     // make sure the user is authenticated
       
       Authenticated &&
-      to.name == 'Login' ||
       to.name == 'Signup' 
+     
+  ) {
+    // redirect the user to the login page
+    return { name:'profile' }
+    }
+  
+   if (
+    // make sure the user is authenticated
+      
+      Authenticated &&
+      to.name == 'Login'
      
   ) {
     // redirect the user to the login page

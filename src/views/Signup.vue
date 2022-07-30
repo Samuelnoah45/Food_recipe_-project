@@ -17,7 +17,7 @@ const variables=ref({
 const confirmPass = ref();
 const queryOptions = ref({ enabled: false })
     
-const { result, onResult } = useQuery(register, variables, queryOptions);
+const { result, onResult ,loading} = useQuery(register, variables, queryOptions);
 const confirmPassword = () =>
 {
     if(variables.value.password==confirmPass.value) {
@@ -170,8 +170,9 @@ console.log("womcwnc");
                 />
               </div>
 
-              <div class="flex justify-center">
+              <div  class="flex justify-center">
                  <button
+                 v-if="!loading"
                   @click="confirmPassword()"
                   class="
                     w-44
@@ -193,6 +194,32 @@ console.log("womcwnc");
                 >
                   Sign up
                 </button>
+            <button
+                v-else
+                  type="submit"
+                  class="
+                    w-44
+                    flex
+                    justify-center
+                    bg-orange-400/70
+                   
+                    text-gray-100
+                    p-3
+                    rounded-full
+                    tracking-wide
+                    font-semibold
+                    shadow-lg
+                    cursor-pointer
+                    transition
+                    ease-in
+                    duration-400
+                  "
+                >
+                sign up
+      <span a class=" absolute animate-spin text-9xl inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading">
+              </span>    
+                </button>
+                
               </div>
             </div>
             <div class="mt-4">

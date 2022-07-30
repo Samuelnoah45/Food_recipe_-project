@@ -44,9 +44,9 @@ function   mobile_dropdown(){
 
 <template>
   <div class="fixed z-20 w-full app_nav">
-<nav class=" bg-white border-gray-300 px-2 sm:px-4 py-2.5  shadow-lg ">
+<nav class=" bg-white border-gray-300 px-2 sm:px-6 py-2.5  shadow-lg ">
 
-    <div class=" flex   justify-between w-full p-2  text-gray-700"  id="mobile-menus">
+    <div class=" flex   justify-between w-full p-4  text-gray-700"  id="mobile-menus">
       <div class="flex  flex-g text-md ">
       <button><i class="fa-solid fa-bars"></i> Explore</button>
     <div class="ml-6 font-sans font-bold text-xl text-orange-600"><span><router-link to="/">SKYRecipe</router-link></span>

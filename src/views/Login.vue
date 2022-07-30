@@ -16,7 +16,7 @@ const variables=ref({
  
 const password=ref();
 const queryOptions=ref({enabled:false})
-const {result,onResult,onError} = useQuery(login, variables,queryOptions);
+const {result,onResult,onError,loading} = useQuery(login, variables,queryOptions);
 function  busi(){
   checkAccount();
   
@@ -195,7 +195,7 @@ function setCookie(cname, cvalue, exdays) {
               <div class="flex justify-center">
   
                    
-                <button
+                <button v-if="!loading"
                   @click="checkAccount"
                   type="submit"
                   class="
@@ -217,6 +217,32 @@ function setCookie(cname, cvalue, exdays) {
                   "
                 >
                   Sign in
+                </button>
+
+                 <button
+                v-else
+                  type="submit"
+                  class="
+                    w-44
+                    flex
+                    justify-center
+                    bg-orange-400/70
+                   
+                    text-gray-100
+                    p-3
+                    rounded-full
+                    tracking-wide
+                    font-semibold
+                    shadow-lg
+                    cursor-pointer
+                    transition
+                    ease-in
+                    duration-400
+                  "
+                >
+                sign in
+      <span a class=" absolute animate-spin text-9xl inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading">
+              </span>    
                 </button>
              
               </div>

@@ -16,7 +16,7 @@ let varibales=ref({id:10})
 console.log(userStore.user);
 const { result, onResult,loading, onError, variables,fetchMore } = useQuery(allfoods, () => ({offset:userStore.user.pageNumber*12-12, limit: 12}));
 
-let total;
+let total=ref();
 onResult(({ data }) =>
 {
  total =result.value.food_aggregate.aggregate.count;
@@ -61,6 +61,13 @@ onBeforeRouteLeave((to, from) => {
     
     })
 
+window.onscroll = () => {
+  let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+  if (bottomOfWindow) {
+    console.log("fetch it");
+  }
+};
 
 </script>
 <template>
@@ -105,18 +112,29 @@ onBeforeRouteLeave((to, from) => {
               </div>
 
       </div>
-    <div class="flex flex-col  items-center w-full">
+
+
+
+  <div v-if="loading" class="min-h-[40rem] flex flex-col  border shadow-sm rounded-xl   dark:shadow-slate-700/[.7]">
+  <div class="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
+    <div class="flex justify-center">
+      <div class="animate-spin text-9xl inline-block w-28 h-28 border-[3px] border-current border-t-transparent text-orange-600 rounded-full" role="status" aria-label="loading">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+    <div v-else class="flex flex-col  items-center w-full">
       
       
       <div class="grid grid-cols-1 md:grid-cols-7  w-full">
         
-    <div class="min-h-full bg-black" v-if="loading">3 rnin</div>
-    <Card  v-else  :result="result" class="flex flex-col  m-8 md:col-start-2 md:col-end-6 flex-wrap "></Card>
+    <Card   :result="result" class="flex flex-col  m-8 md:col-start-2 md:col-end-6 flex-wrap "></Card>
       </div>
       <div>
   <vue-awesome-paginate class="self-center m-4 mt-6"
-    :total-items="34"
-    :items-per-page="3"
+    :total-items="result.food_aggregate.aggregate.count"
+    :items-per-page="12"
     :max-pages-shown="7"
     :current-page="userStore.user.pageNumber"
     :on-click="onClickHandler"/>
