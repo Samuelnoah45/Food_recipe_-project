@@ -7,10 +7,11 @@ const bodyParser = require("body-parser");
 const signupHandler = require("./handlers/Signup.js");
 const loginHundler = require("./handlers/Login.js");
 const uploadImage = require("./handlers/upload.js");
+const changePassword=require("./handlers/changePassword")
 dotenv.config({path: "variables.env"});
 var upload = multer();
 const app = express();
-const port = process.env.PORT || 5000;
+const port =  7000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -19,6 +20,7 @@ app.use(express.static('public'));
 app.post("/Signup", signupHandler);
 app.post('/upload',upload.array('image',3),uploadImage);
 app.post('/login', loginHundler);
+app.post('/changePassword', changePassword);
 
 
 const server = http.createServer(app);

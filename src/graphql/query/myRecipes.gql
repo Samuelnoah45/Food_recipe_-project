@@ -1,5 +1,5 @@
-query food($offset: Int, $limit: Int) {
-  food(offset: $offset, limit: $limit, order_by: {category: desc}) {
+query food($offset: Int, $limit: Int,$id:Int!) {
+  food(offset: $offset, limit: $limit where: {user_id: {_eq: $id}}) {
     id
     category
     title
@@ -14,13 +14,9 @@ query food($offset: Int, $limit: Int) {
         }
       }
     }
-    images {
+      images {
       url
     }
   }
-  food_aggregate {
-    aggregate {
-      count
-    }
-  }
+
 }

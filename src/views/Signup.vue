@@ -5,6 +5,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useMutation, useQuery } from '@vue/apollo-composable'
 import register from '../graphql/auth/signup.gql'
 import NavBar from '../components/NavBar.vue'
+import {useUserStore} from '../store/userInfo'
+const userStore = useUserStore();
     const router = useRouter();
     const show=ref(false);
 
@@ -28,19 +30,20 @@ const confirmPassword = () =>
      } 
    else{
 
-      console.log("sky");
-    }
+     }
 
 onResult((result)=>{
-
-  if(result.data!=null){
-
+  
+  if(!result.loading){
+    console.log("sky");
        const data=result.data.Signup
-       console.log(data.token);
- 
+       userStore.setUser(data);
       setCookie("foodRecipeUser",data.token,30);
       show.value=true
       router.push({ name: "Home" });
+  } {
+
+     console.log("loading");
    }
 
       })

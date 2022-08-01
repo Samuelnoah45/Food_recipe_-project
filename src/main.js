@@ -21,7 +21,8 @@ import "vue-awesome-paginate/dist/style.css";
 import './assets/tailwind.css'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
-const pinia=createPinia ()
+const pinia = createPinia()
+
 if (localStorage.getItem("state")) {
   pinia.state.value=JSON.parse(localStorage.getItem("state"))
 

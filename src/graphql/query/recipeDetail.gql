@@ -13,10 +13,7 @@ query detail($id: Int) {
     steps(order_by: {stepNumber: asc}) {
       instruction
     }
-    reviews(limit: 1, offset: 0) {
-      review
-    }
-    reviews_aggregate {
+    rating_aggregate {
       aggregate {
         count(columns: created_at)
         avg {
@@ -34,5 +31,11 @@ query detail($id: Int) {
         count(columns: Ingredient_id)
       }
     }
+    comments_aggregate {
+      aggregate {
+        count(columns: comment)
+      }
+    }
   }
+
 }

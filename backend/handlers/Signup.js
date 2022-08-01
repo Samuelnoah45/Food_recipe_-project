@@ -49,7 +49,9 @@ const signupHandler = async (req, res) => {
       expiresIn: '1hr'
   })
 
+  
   return res.json({
+    userId:data.data.insert_users_one.id,
     token,
     email: data.data.insert_users_one.email,
     name: data.data.insert_users_one.name, 

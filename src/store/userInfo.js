@@ -8,7 +8,7 @@ export const useUserStore = defineStore('userStore', {
           email: "",
           active:false,
           pageNumber: 1,
-          userId: null,
+          userId: 0,
          
       },
       profile: {

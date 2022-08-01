@@ -31,10 +31,14 @@ const loginHandler = async (req, res) => {
     const isValidPassword = await bcrypt.compare(
       credientials.password,
       user.password
-      ) 
-  
-  if(isValidPassword){
-     console.log(user)
+    ) 
+
+
+    console.log(isValidPassword);
+
+    if(isValidPassword){
+      console.log("isValidPassword");
+      console.log(user)
 
   payload = {
     "https://hasura.io/jwt/claims": {
@@ -71,7 +75,7 @@ return res.json({
     email:"",
     name: "",
     token: "",
-    userId:-1
+    userId:0
 })
     }
 

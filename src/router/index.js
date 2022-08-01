@@ -49,44 +49,44 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach(async (to, from) =>
-{
-    const user = JSON.parse(localStorage.getItem("state"))
- const  Authenticated=user.userStore.user.active;
-  if (
-    // make sure the user is authenticated
+// router.beforeEach(async (to, from) =>
+// {
+//     const user = JSON.parse(localStorage.getItem("state"))
+//      const  Authenticated=user.userStore.user.active;
+//   if (
+//     // make sure the user is authenticated
       
-      !Authenticated &&
-      to.name !== 'Login' &&
-      to.name !== 'Signup' &&
-      to.name !== 'detail' &&
-      to.name !== 'Home'
-  ) {
-    // redirect the user to the login page
-    return { name: 'Login' }
-  }
+//       !Authenticated &&
+//       to.name !== 'Login' &&
+//       to.name !== 'Signup' &&
+//       to.name !== 'detail' &&
+//       to.name !== 'Home'
+//   ) {
+//     // redirect the user to the login page
+//     return { name: 'Login' }
+//   }
     
-    if (
-    // make sure the user is authenticated
+//     if (
+//     // make sure the user is authenticated
       
-      Authenticated &&
-      to.name == 'Signup' 
+//       Authenticated &&
+//       to.name == 'Signup' 
      
-  ) {
-    // redirect the user to the login page
-    return { name:'profile' }
-    }
+//   ) {
+//     // redirect the user to the login page
+//     return { name:'profile' }
+//     }
   
-   if (
-    // make sure the user is authenticated
+//    if (
+//     // make sure the user is authenticated
       
-      Authenticated &&
-      to.name == 'Login'
+//       Authenticated &&
+//       to.name == 'Login'
      
-  ) {
-    // redirect the user to the login page
-    return { name:'profile' }
-  }
-})
+//   ) {
+//     // redirect the user to the login page
+//     return { name:'profile' }
+//   }
+// })
 
 export default router
