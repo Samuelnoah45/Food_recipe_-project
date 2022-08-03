@@ -15,17 +15,16 @@ library.add(far);
 import { dom } from "@fortawesome/fontawesome-svg-core";
 dom.watch();
 
-import fileBase64 from 'vue-file-base64';
+// import fileBase64 from 'vue-file-base64';
 import { createPinia } from 'pinia'
 import "vue-awesome-paginate/dist/style.css";
 import './assets/tailwind.css'
-
 const pinia = createPinia()
-
 if (localStorage.getItem("state")) {
   pinia.state.value=JSON.parse(localStorage.getItem("state"))
 
 }
+
 
 watch(pinia.state, (state) =>
 {
@@ -36,15 +35,11 @@ watch(pinia.state, (state) =>
 
 
 library.add(fas)
-const app=createApp({
-     setup() {
-    provide(DefaultApolloClient, apolloClient);
-  },
-  render: () => h(App),
+const app=createApp({setup() { provide(DefaultApolloClient, apolloClient); }, render: () => h(App),
 })
 app.use(VueAwesomePaginate)
 app.component('font-awesome-icon',FontAwesomeIcon)
-app.component('fileBase64',fileBase64)
+// app.component('fileBase64',fileBase64)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

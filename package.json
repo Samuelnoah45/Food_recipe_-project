@@ -1,38 +1,34 @@
 {
-  "name": "food_recipe",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@apollo/client": "^3.6.9",
-    "@fortawesome/fontawesome-svg-core": "^6.1.2",
-    "@fortawesome/free-brands-svg-icons": "^6.1.2",
-    "@fortawesome/free-regular-svg-icons": "^6.1.2",
-    "@fortawesome/free-solid-svg-icons": "^6.1.2",
-    "@fortawesome/vue-fontawesome": "^3.0.0-5",
-    "@headlessui/vue": "^1.6.7",
-    "@vue/apollo-composable": "^4.0.0-alpha.18",
-    "autoprefixer": "^10",
-    "graphql": "^16.5.0",
-    "graphql-tag": "^2.12.6",
-    "jade": "^1.11.0",
-    "pinia": "^2.0.17",
-    "postcss": "^8",
-    "prettier-plugin-tailwind": "^2.2.12",
-    "tailwind-scrollbar-hide": "^1.1.7",
-    "tailwindcss": "^3",
-    "vee-validate": "^4.6.2",
-    "vue": "^3.2.25",
-    "vue-apollo": "^3.1.0",
-    "vue-awesome-paginate": "^1.0.0",
-    "vue-file-base64": "^1.0.2",
-    "vue-router": "^4.1.2"
-  },
-  "devDependencies": {
+    "name": "vue-3-pinia-registration-login-example",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview --port 5050",
+        "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    },
+    "dependencies": {
+        "@apollo/client": "^3.6.9",
+        "@fortawesome/fontawesome-svg-core": "^6.1.2",
+        "@fortawesome/free-brands-svg-icons": "^6.1.2",
+        "@fortawesome/free-regular-svg-icons": "^6.1.2",
+        "@fortawesome/free-solid-svg-icons": "^6.1.2",
+        "@fortawesome/vue-fontawesome": "^3.0.0-5",
+        "@vue/apollo-composable": "^4.0.0-alpha.19",
+        "autoprefixer": "^10.4.8",
+        "pinia": "^2.0.13",
+        "postcss": "^8",
+        "prettier-plugin-tailwind": "^2.2.12",
+        "tailwind-scrollbar-hide": "^1.1.7",
+        "tailwindcss": "^3",
+        "vee-validate": "^4.5.11",
+        "vue": "^3.2.33",
+        "vue-apollo": "^3.1.0",
+        "vue-awesome-paginate": "^1.0.0",
+        "vue-router": "^4.0.14",
+        "yup": "^0.32.11"
+    },
+    "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.19.0",
@@ -43,5 +39,5 @@
     "vite": "^2.9.9",
     "vite-plugin-simple-gql": "^0.5.0",
     "vue-cli-plugin-tailwind": "~3.0.0"
-  }
+    }
 }

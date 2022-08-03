@@ -1,12 +1,10 @@
-import {
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache,
-  gql
-} from "@apollo/client/core";
-
- import token from '../Authentication/cookie';
+import {ApolloClient,createHttpLink,InMemoryCache,gql} from "@apollo/client/core";
+import token from '../Authentication/cookie';
+// import { useUserStore } from "../src/store/userInfo";
+// const userStore =useUserStore()
+// console.log(userStore.user.token)
 const auth = "Bearer " + token.getCookie("foodRecipeUser");
+
 let httpLink;
 console.log(token.getCookie("foodRecipeUser"));
 if (token.getCookie("foodRecipeUser") !="") {

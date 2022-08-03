@@ -1,35 +1,36 @@
 <script setup>
 import NavBar from "../components/NavBar.vue";
+import { Form, Field } from 'vee-validate';
+import * as Yup from 'yup';
 import { ref, watch} from 'vue'
-import { useRouter, useRoute,
-    onBeforeRouteLeave
-} from 'vue-router'
+import { useRouter, useRoute, onBeforeRouteLeave} from 'vue-router'
 
-import {
-    useQuery,
-} from "@vue/apollo-composable"
+import { useQuery} from "@vue/apollo-composable"
 import login from '../graphql/auth/login.gql'
-import {
-    useUserStore
-} from '../store/userInfo'
+import {  useUserStore} from '../store/userInfo'
 const router = useRouter();
 const userStore = useUserStore();
-const show = ref(false);
-const variables = ref({
-    emails: "",
-    password: ""
+
+
+
+
+const schema = Yup.object().shape({
+    email: Yup.string().required('Email is required'),
+    password: Yup.string().required('Password is required')
 });
 
+async function onSubmit(values) {
+    const authStore = useAuthStore();
+    const { username, password } = values;
+    await authStore.login(username, password);
+}
+
+const show = ref(false);
+const variables = ref({emails: "",password: ""});
+
 const password = ref();
-const queryOptions = ref({
-    enabled: false
-})
-const {
-    result,
-    onResult,
-    onError,
-    loading
-} = useQuery(login, variables, queryOptions);
+const queryOptions = ref({enabled: false})
+const { result, onResult, onError, loading} = useQuery(login, variables, queryOptions);
 
 function busi() {
     checkAccount();
@@ -52,7 +53,6 @@ async function checkAccount() {
         if (!result.loading) {
 
             if (result.data.signin.email != '') {
-                console.log(result)
                 const data = result.data.signin
                 setCookie("foodRecipeUser", data.token, 30);
                 //set user to pinian 
@@ -86,18 +86,8 @@ async function checkAccount() {
 <template>
 <div class="login">
     <nav-bar></nav-bar>
-    <div class="auth bg-no-repeat bg-cover bg-center relative" style="
-      ">
-        <div class="back
-          absolute
-          bg-gradient-to-l
-          from-orange-600
-          to-orange-400
-          opacity-75
-          inset-0
-          z-1
-        "></div>
-
+    <div class="auth bg-no-repeat bg-cover bg-center relative" style="">
+     <div class="back absolute bg-gradient-to-l from-orange-600 to-orange-400 opacity-75 inset-0 z-1"></div>
         <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
             <div class="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">
                 <div class="self-start hidden lg:flex flex-col text-white">
@@ -113,49 +103,26 @@ async function checkAccount() {
                         <p class="text-gray-500">Please sign in to your account.</p>
                     </div>
                     <div class="space-y-5">
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-700 tracking-wide">Email</label>
-                            <input v-model="variables.emails" class="
-                    w-full
-                    text-base
-                    px-4
-                    py-2
-                    border border-gray-300
-                    rounded-lg
-                    focus:outline-none focus:border-orange-400
-                  " type="" placeholder="mail@gmail.com" />
-
-                        </div>
-                        <div class="space-y-2">
-                            <label class="mb-5 text-sm font-medium text-gray-700 tracking-wide">
-                                Password
+                        <Form class="space-y-5" @submit="checkAccount" :validation-schema="schema" v-slot="{ errors }">
+                        <div class="space-y-2 flex flex-col">
+                            <label class="text-sm font-medium text-gray-700 tracking-wide">Email *</label>
+                             <Field name="email"  v-model="variables.emails" type="email" class="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400 "  placeholder="Your email" :class="{ 'border-red-600': errors.email }" />
+                             <span class="text-red-600 text-sm" >{{errors.email}}</span>
+                       </div>
+                        <div class="space-y-2 flex flex-col">
+                            <label class=" text-sm font-medium text-gray-700 tracking-wide">
+                                Password *
                             </label>
-                            <input v-model="variables.password" class="
-                    w-full
-                    content-center
-                    text-base
-                    px-4
-                    py-2
-                    border border-gray-300
-                    rounded-lg
-                    focus:outline-none focus:border-orange-400
-                  " type="password" placeholder="Enter your password" />
+                             <Field name="password"  v-model="variables.password" type="password" class="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400 "  placeholder="Your email" :class="{ 'border-red-600': errors.password }" />
+                             <span class="text-red-600 text-sm" >{{errors.password}}</span>
                         </div>
-                        <div>
-                        </div>
+                       
                         <div class="" v-show="show">
                             <p class="text-red-700">Invalid Email or Password</p>
                         </div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between space-x-7">
                             <div class="flex items-center">
-                                <input id="remember_me" name="remember_me" type="checkbox" class="
-                      h-4
-                      w-4
-                      bg-blue-5
-                      focus:ring-blue-400
-                      border-gray-300
-                      rounded
-                    " />
+                                <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 bg-blue-5 focus:ring-blue-400 border-gray-300 rounded " />
 
                                 <label for="remember_me" class="ml-2 block text-sm text-gray-800">
                                     Remember me
@@ -168,61 +135,25 @@ async function checkAccount() {
                             </div>
                         </div>
                         <div class="flex justify-center">
-
-                            <button v-if="!loading" @click="checkAccount" type="submit" class="
-                    w-44
-                    flex
-                    justify-center
-                    bg-orange-400
-                    hover:bg-orange-500
-                    text-gray-100
-                    p-3
-                    rounded-full
-                    tracking-wide
-                    font-semibold
-                    shadow-lg
-                    cursor-pointer
-                    transition
-                    ease-in
-                    duration-400
-                  ">
-                                Sign in
-                            </button>
-
-                            <button v-else type="submit" class="
-                    w-44
-                    flex
-                    justify-center
-                    bg-orange-400/70
-
-                    text-gray-100
-                    p-3
-                    rounded-full
-                    tracking-wide
-                    font-semibold
-                    shadow-lg
-                    cursor-pointer
-                    transition
-                    ease-in
-                    duration-400
-                  ">
-                                sign in
-                                <span a class=" absolute animate-spin text-9xl inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading">
-                                </span>
-                            </button>
-
+                        <button  :disabled="loading" type="submit" :class="{'bg-orange-300':loading, 'hover:bg-orange-00':loading,}" class=" w-44 flex justify-center bg-orange-400 hover:bg-orange-500 text-gray-100  p-3  rounded-full  tracking-wide font-semibold shadow-lg  cursor-pointer transition  ease-in duration-400 ">
+                            Sign in
+                        <span v-if="loading" a class=" absolute animate-spin text-9xl inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
+                        </button>
+                        <!-- <button  @click="checkAccount" type="submit" class=" w-44 flex justify-center bg-orange-400 hover:bg-orange-500 text-gray-100  p-3  rounded-full  tracking-wide font-semibold shadow-lg  cursor-pointer transition  ease-in duration-400 ">
+                            Sign in
+                        </button> -->
                         </div>
+                    </Form>
                     </div>
                     <div class="mt-4">
                         <p class="hover:text-orange-500 text-orange-400">
                             <router-link to="/signup">Register Now </router-link>
                         </p>
-
                     </div>
                     <div class="pt-5 text-center text-gray-400 text-xs">
                         <span>
                             Copyright © 2021-2022
-                            <a href="" rel="" target="_blank" title="Ajimon" class="text-orange hover:text-orange-500">sky</a></span>
+                        <a href="" rel="" target="_blank" title="Ajimon" class="text-orange hover:text-orange-500">sky</a></span>
                     </div>
                 </div>
             </div>

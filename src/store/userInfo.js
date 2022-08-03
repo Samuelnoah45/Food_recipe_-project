@@ -6,6 +6,7 @@ export const useUserStore = defineStore('userStore', {
       user: {
           name: "",
           email: "",
+          // token:"",
           active:false,
           pageNumber: 1,
           userId: 0,
@@ -30,7 +31,8 @@ export const useUserStore = defineStore('userStore', {
           this.user.name = data.name;
           this.user.active = true;
           this.user.userId=data.userId
-          this.user.pageNumber=1
+          this.user.pageNumber = 1
+          // this.user.token=data.token
       
     },
     setPage(page){

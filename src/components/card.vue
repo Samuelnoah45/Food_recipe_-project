@@ -28,9 +28,9 @@ const foodImage = "../image/homepage.jpg";
 
 <template>
   
-        <div @click="detail(food.id)" class="md:block  flex  bg-white  rounded-b-lg  shadow-xl bg-gray-">
-            <div class="flex-1 w-full max-h-48 max-w-lg  shrink-0 h-64 rounded-lg shadow-2xl overflow-hidden relative">
-                 <img v-if="food.images.length>0" class="absolute inset-0 min-h-full object-cover"  :src="food.images[0].url" alt="">
+        <div @click="detail(food.id)" class="md:block  flex  bg-white rounded-lg  shadow-xl bg-gray-">
+            <div class="flex-1 w-full max-h-48 max-w-lg  shrink-0 rounded-t-lg h-64 shadow-2xl overflow-hidden relative">
+                <img v-if="food.images.length>0" class="absolute inset-0 min-h-full object-cover"  :src="food.images[0].url" alt="">
                 <img v-else class="absolute inset-0 min-h-full object-cover " src="../assets/images/homepage.jpg" alt="" />
                 <div class="absolute inset-0  bg-black bg-opacity-30"></div>
                 <div class="absolute inset-0 ">
@@ -41,7 +41,7 @@ const foodImage = "../image/homepage.jpg";
                 <div class="flex h-full items-center justify-center relative"></div>
             </div>
 
-            <div class="flex-1">
+            <div class="flex-1 p-4">
                 <div class="text-xl font-extrabold p-2">
                     <router-link class="hover:underline " :to="{ name: 'detail', params: { id:food.id }}">{{food.title }}</router-link>
                 </div>

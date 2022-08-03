@@ -41,12 +41,12 @@ onBeforeRouteLeave((to, from) => {
     <div class="flex  justify-center pt-32 mb-8">
         <div class="profile   md:flex-row  flex flex-col">
             <div class="md:mr-8 m-0   flex-shrink-0 md:sticky top-24 bg-white shadow-lg  md:self-start md:pb-36 pb-2">
-                <div class="grid grid-cols-3 pt-2 ">
-                    <div class="flex  justify-center items-center">
-                        <i class="text-4xl text-orange-600  fa-solid fa-user"></i>
+                <div class="grid grid-cols-3 pt-4 ">
+                    <div class="flex  justify-center items-center p-2">
+                       <img class="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/defaultUser.png" alt="">
                     </div>
-                    <div class="sky uppercase w-44 col-span-2 font-mono font-bold text-md  ">
-                        Hi @samuel45
+                    <div class="sky uppercase w-44 col-span-2 font-mono font-bold text-md flex items-center">
+                        Hi samuel noah
                     </div>
                 </div>
                 <div class="md:block flex justify-evenly ">

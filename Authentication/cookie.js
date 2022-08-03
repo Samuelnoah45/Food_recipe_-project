@@ -19,14 +19,7 @@ export default {
       }
       
         if(ca[i].substring(0,count)===cname){
-        return  true;
-      
-        }
-        
-        }
-    
-        
-      
+        return  true;}}
       },
       getCookie: function(cname) {
         let name = cname + "=";
@@ -42,7 +35,17 @@ export default {
           }
         }
         return "";
-      }
+  },
+      
+      setCookie:function(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+       }
+
+
+
 };
 
 
