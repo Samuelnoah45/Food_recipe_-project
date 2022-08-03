@@ -16,9 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@headlessui/vue": "^1.6.7",
     "@vue/apollo-composable": "^4.0.0-alpha.18",
-    "@vueup/vue-quill": "^1.0.0-beta.9",
     "autoprefixer": "^10",
-    "axios": "^0.27.2",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
     "jade": "^1.11.0",
@@ -27,14 +25,12 @@
     "prettier-plugin-tailwind": "^2.2.12",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "^3",
-    "vee-validate": "^2.2.15",
+    "vee-validate": "^4.6.2",
     "vue": "^3.2.25",
     "vue-apollo": "^3.1.0",
     "vue-awesome-paginate": "^1.0.0",
     "vue-file-base64": "^1.0.2",
-    "vue-router": "^4.1.2",
-    "vuesax": "^3.12.2",
-    "vuesax3": "^4.0.22"
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",

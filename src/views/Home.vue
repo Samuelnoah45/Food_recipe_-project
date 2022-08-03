@@ -19,7 +19,6 @@ import {
 } from 'vue-router'
 const userStore = useUserStore();
 const router = useRouter();
-
 let varibales = ref({
     id: 10
 })
@@ -34,6 +33,8 @@ const {
 } = useQuery(allfoods, () => ({
     offset: userStore.user.pageNumber * 12 - 12,
     limit: 12
+
+    
 }));
 
 let total = ref();
@@ -65,7 +66,6 @@ const onClickHandler = (page) => {
                     ...fetchMoreResult.food,
                 ],
                 food_aggregate: fetchMoreResult.food_aggregate
-
             }
         },
 
@@ -149,8 +149,8 @@ window.onscroll = () => {
     <div v-else class="flex flex-col  items-center w-full">
 
         <div class="w-full flex justify-center">
-           <div class=" basis-1/2 md:grid-cols-3 md:grid   md:col-start-2 md:col-end-6 ">
-               <Card  class="m-6 grow " v-for="food in   result.food" :key="food" :food="food" ></Card>
+           <div class="homeCard md:grid-cols-3 md:grid   md:col-start-2 md:col-end-6 ">
+               <Card  class="m-6 flex-shrink-0" v-for="food in   result.food" :key="food" :food="food" ></Card>
            </div>
            
         </div>
@@ -164,6 +164,11 @@ window.onscroll = () => {
 </template>
 
 <style>
+
+.homeCard{
+    width:1000px
+
+}
 .home {
     background-image: url(../assets/images/homepage.jpg);
     background-attachment: fixed;

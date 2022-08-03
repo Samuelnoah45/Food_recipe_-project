@@ -49,7 +49,13 @@ export const useUserStore = defineStore('userStore', {
     {
       this.profile.active=btn
 
+    },
+    resetActiveBtn(btn)
+    {
+      this.profile.active=btn
+
     }
+    
     
   }
 })

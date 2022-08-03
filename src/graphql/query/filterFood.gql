@@ -1,0 +1,26 @@
+query food($offset: Int, $limit: Int, $filterTerm: [food_bool_exp!]) {
+  food(offset: $offset, limit: $limit, where: {_and:$filterTerm}){
+  id
+    category
+    title
+    duration
+    user {
+      name
+    }
+    rating_aggregate {
+      aggregate {
+        avg {
+          rating
+        }
+      }
+    }
+    images {
+      url
+    }
+  }
+  food_aggregate {
+    aggregate {
+      count
+    }
+  }
+}

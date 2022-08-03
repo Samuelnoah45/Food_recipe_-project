@@ -5,7 +5,8 @@ import Signup from '../views/Signup.vue'
 import Detail from '../views/FoodDetail.vue'
 import NotFound from '../views/NotFound.vue'
 import Profile from '../views/profile.vue'
-import  check from '../../Authentication/cookie';
+import check from '../../Authentication/cookie';
+import SearchResult from '../views/SearchResult.vue'
 
 
 const routes = [
@@ -36,7 +37,13 @@ const routes = [
         name: 'profile',
         component: Profile,
         
-    }, 
+  },
+     {
+        path: '/search',
+        name: 'search',
+        component: SearchResult,
+        
+    },
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
@@ -47,46 +54,49 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+      scrollBehavior() {
+            document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+        }
 })
 
-// router.beforeEach(async (to, from) =>
-// {
-//     const user = JSON.parse(localStorage.getItem("state"))
-//      const  Authenticated=user.userStore.user.active;
-//   if (
-//     // make sure the user is authenticated
+router.beforeEach(async (to, from) =>
+{
+    const user = JSON.parse(localStorage.getItem("state"))
+     const  Authenticated=user.userStore.user.active;
+  if (
+    // make sure the user is authenticated else
       
-//       !Authenticated &&
-//       to.name !== 'Login' &&
-//       to.name !== 'Signup' &&
-//       to.name !== 'detail' &&
-//       to.name !== 'Home'
-//   ) {
-//     // redirect the user to the login page
-//     return { name: 'Login' }
-//   }
+      !Authenticated &&
+      to.name !== 'Login' &&
+      to.name !== 'Signup' &&
+      to.name !== 'detail' &&
+      to.name !== 'Home'
+  ) {
+    // redirect the user to the login page
+    return { name: 'Login' }
+  }
     
-//     if (
-//     // make sure the user is authenticated
+    if (
+    // make sure the user is logged out
       
-//       Authenticated &&
-//       to.name == 'Signup' 
+      Authenticated &&
+      to.name == 'Signup' 
      
-//   ) {
-//     // redirect the user to the login page
-//     return { name:'profile' }
-//     }
+  ) {
+    // redirect the user to the login page
+    return { name:'profile' }
+    }
   
-//    if (
-//     // make sure the user is authenticated
+   if (
+    // make sure the user is authenticated
       
-//       Authenticated &&
-//       to.name == 'Login'
+      Authenticated &&
+      to.name == 'Login'
      
-//   ) {
-//     // redirect the user to the login page
-//     return { name:'profile' }
-//   }
-// })
+  ) {
+    // redirect the user to the login page
+    return { name:'profile' }
+  }
+})
 
 export default router

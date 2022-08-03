@@ -1,0 +1,9 @@
+mutation reviews($comment:[comment_insert_input!]!,$rating:[rating_insert_input!]!,){
+  insert_comment(objects:$comment){
+    affected_rows
+  }
+  
+  insert_rating(objects:$rating){
+    affected_rows
+  }
+}

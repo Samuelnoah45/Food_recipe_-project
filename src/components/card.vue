@@ -2,6 +2,8 @@
 import {
     ref
 } from "vue";
+import { useRouter } from 'vue-router'
+
 defineProps({
     food: Object,
     hideName: {
@@ -13,6 +15,12 @@ defineProps({
     
        })
 const x = ref();
+const router=useRouter()
+const detail = (id) =>
+{
+router.push({ name: 'detail', params: { id } })
+    
+}
 
 // const foods = ref(props.foods);
 const foodImage = "../image/homepage.jpg";
@@ -20,8 +28,8 @@ const foodImage = "../image/homepage.jpg";
 
 <template>
   
-        <div class="md:block grid grid-cols-3 bg-white  rounded-b-lg  shadow-xl bg-gray-">
-            <div class=" w-full max-h-48 max-w-lg   h-64 rounded-lg shadow-2xl overflow-hidden relative">
+        <div @click="detail(food.id)" class="md:block  flex  bg-white  rounded-b-lg  shadow-xl bg-gray-">
+            <div class="flex-1 w-full max-h-48 max-w-lg  shrink-0 h-64 rounded-lg shadow-2xl overflow-hidden relative">
                  <img v-if="food.images.length>0" class="absolute inset-0 min-h-full object-cover"  :src="food.images[0].url" alt="">
                 <img v-else class="absolute inset-0 min-h-full object-cover " src="../assets/images/homepage.jpg" alt="" />
                 <div class="absolute inset-0  bg-black bg-opacity-30"></div>
@@ -33,7 +41,7 @@ const foodImage = "../image/homepage.jpg";
                 <div class="flex h-full items-center justify-center relative"></div>
             </div>
 
-            <div class="col-span-2">
+            <div class="flex-1">
                 <div class="text-xl font-extrabold p-2">
                     <router-link class="hover:underline " :to="{ name: 'detail', params: { id:food.id }}">{{food.title }}</router-link>
                 </div>

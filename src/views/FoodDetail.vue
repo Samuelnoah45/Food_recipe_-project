@@ -2,6 +2,10 @@
 import Navbar from "../components/NavBar.vue"
 import Footer from '../components/Footer.vue'
 import RecipeDetail from '../graphql/query/recipeDetail.gql'
+import review from '../graphql/mutation/reviewRecipe.gql'
+import {
+    useUserStore
+} from '../store/userInfo'
 import {
     useRoute,
     useRouter
@@ -19,6 +23,20 @@ const router = useRoute()
 const food_Id = ref({
     id: 18
 })
+
+const userStore = useUserStore();
+const comment = ref({
+    comment: "",
+    food_id: parseInt(router.params.id),
+    user_id: userStore.user.userId
+})
+const rating = ref({
+    rating:0,
+    food_id: parseInt(router.params.id),
+    user_id: userStore.user.userId
+})
+
+
 food_Id.value = parseInt(router.params.id)
 
 const {
@@ -29,6 +47,17 @@ const {
 } = useQuery(RecipeDetail, {
     id: parseInt(router.params.id)
 })
+
+
+const { mutate: sendReviews } = useMutation(review,() => ({
+    variables: {
+        comment: comment.value,
+        rating: rating.value,
+        
+    },
+}))
+
+
 
 onResult(() => {
 
@@ -181,14 +210,13 @@ onError((err) => {
 
         <div class=" p-4 flex border-b-2 border-gray-400 pb-11  flex-col space-y-6 space-x-10 ">
             <div class="text-2xl text-black font-bold">Reviews</div>
-            <div class="flex ">
-                <div class="text-md basis-1/2 text-black font-bold"> <span>What did you think of this
-                        recipe? Share your experience to help others</span></div>
-                <div class="basis-1/2"> <button class="p-4 bg-orange-600 text-white rounded">Add your rating and review </button></div>
+            <div class="flex  items-center flex-col space-y-10">
+                <div class="text-md  text-black font-bold"> <span>What did you think of this
+                        recipe?  comment  and rate recipe </span></div>
+                     <div class="w-full"><textarea v-model="comment" class="border border-orange-600 p-4" placeholder="put you comment it will help other " name="" id="" cols="40" rows="5"></textarea></div> 
+                <div class=""> <button class="p-4 hover:bg-orange-500 bg-orange-600 text-white rounded">submit you review</button></div>
             </div>
-            <div>
-
-            </div>
+           
 
         </div>
 

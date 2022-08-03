@@ -19,7 +19,6 @@ import fileBase64 from 'vue-file-base64';
 import { createPinia } from 'pinia'
 import "vue-awesome-paginate/dist/style.css";
 import './assets/tailwind.css'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const pinia = createPinia()
 
@@ -34,6 +33,7 @@ watch(pinia.state, (state) =>
 }, {
   deep:true
 })
+
 
 library.add(fas)
 const app=createApp({
