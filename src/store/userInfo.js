@@ -1,63 +1,62 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue';
 import { set } from 'pinia/node_modules/vue-demi';
-export const useUserStore = defineStore('userStore', {
-  state() {
-    return {
-      user: {
+export const useUserStore = defineStore('userStore', ()=>{
+  
+  const  user=ref( {
           name: "",
           email: "",
           // token:"",
           active:false,
           pageNumber: 1,
           userId: 0,
-         
-      },
-      profile: {
-        active:"btn1"
-      }
-
-     
-       
-        }
-  },
-    getters: {
-      
+      })
+  const profile =ref( { active:"btn1" })
   
-  },
-  actions: {
-      setUser(data)
+  function   setUser(data)
       {
-          this.user.email = data.email;
-          this.user.name = data.name;
-          this.user.active = true;
-          this.user.userId=data.userId
-          this.user.pageNumber = 1
-          // this.user.token=data.token
+          user.value.email = data.email;
+          user.value.name = data.name;
+          user.value.active = true;
+          user.value.userId=data.userId
+          user.value.pageNumber = 1
+          // user.value.token=data.token
       
-    },
-    setPage(page){
-      this.user.pageNumber = page;
+    }
+ function  setPage(page){
+      user.value.pageNumber = page;
 
-    },
+    }
 
-    reset()
+function reset()
     {
-          this.user.email = "";
-          this.user.name = "";
-          this.user.active = false;
+          user.value.email = "";
+          user.value.name = "";
+          user.value.active = false;
 
-    },
-    setActiveBtn(btn)
+    }
+  function  setActiveBtn(btn)
     {
-      this.profile.active=btn
+    profile.value.active = btn
+    console.log(profile.value.active)
 
-    },
-    resetActiveBtn(btn)
+  }
+  
+function    resetActiveBtn(btn)
     {
-      this.profile.active=btn
+           profile.value.active=btn
 
     }
     
-    
-  }
+  return {
+
+    user,
+    profile,
+    setPage,
+    reset,
+    setActiveBtn,
+    resetActiveBtn,
+    setUser
+  }  
+  
 })

@@ -1,6 +1,7 @@
 import { createApp, provide, h,watch } from 'vue'
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import App from './App.vue'
+import 'vuesax/dist/vuesax.css'
 import { apolloClient } from "../apollo/config";
 import router from './router';
 import VueAwesomePaginate from "vue-awesome-paginate";
@@ -14,8 +15,6 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(far);
 import { dom } from "@fortawesome/fontawesome-svg-core";
 dom.watch();
-
-// import fileBase64 from 'vue-file-base64';
 import { createPinia } from 'pinia'
 import "vue-awesome-paginate/dist/style.css";
 import './assets/tailwind.css'
@@ -39,7 +38,6 @@ const app=createApp({setup() { provide(DefaultApolloClient, apolloClient); }, re
 })
 app.use(VueAwesomePaginate)
 app.component('font-awesome-icon',FontAwesomeIcon)
-// app.component('fileBase64',fileBase64)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

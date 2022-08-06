@@ -64,11 +64,11 @@ const searchQuery = computed(() =>
     return {
           filterTerm :[
                 {
-                  title: {_like:`%${searchTerm.value}%` }
-                },
-                {
-                  user: {name:{_like: `%${searchTerm.value}%`}}
+                  title: {_like:`%${route.query.search}%` }
                 }
+                // {
+                // //   user: {name:{_like: `%${route.query.search}%`}}
+                // }
                  
                 ]
 
@@ -90,8 +90,11 @@ const removeInc = (index) =>
 
 
 
-const { result, onResult:onFilter, onError } = useQuery(filter, filterQuery, filterOption) 
-const { result:searchResult,onResult:onSearch } = useQuery(filter, searchQuery,searchOption) 
+const { result, onResult:onFilter, onError,loading:filterLoading } = useQuery(filter, filterQuery, filterOption) 
+const { result: searchResult, onResult: onSearch, onError: searchError,loading:searchLoading  } = useQuery(search,
+    () => ({
+    searchTerm:`%${route.query.search}%`
+      })) 
    
 
 
@@ -107,10 +110,10 @@ const findRecipe = (findBy) =>
     }
 
     else {
-         searchTime.value = true
-        filterTime.value=false
-        searchOption.value.enabled = true
-        // filterOption.value.enabled=false
+        console.log(route.query.search);
+        router.replace({name:"search" ,query:{search:searchTerm.value}})
+        searchTime.value = true
+        filterTime.value = false 
           
       }  
 }
@@ -119,15 +122,20 @@ const findRecipe = (findBy) =>
 
 onFilter((result) =>
 {
-    filterOption.value = false
+filterOption.value = false
  console.log(result)
     
 })
 onSearch((searchResult) =>
 {
  console.log(searchResult)
- searchOption.value=false
+//  searchOption.value=false
     
+})
+
+searchError((error) =>
+{
+    console.log(error);
 })
 
 
@@ -150,10 +158,10 @@ const recipes2 = computed(() => searchResult.value?.food ?? [])
     <!-- <img src="../assets/Foods/food5.jpg" alt=""> -->
     <div class=" min-w-full flex justify-center">
 
-        <div class="  p-6 bg-white border-l-8 border-orange-600 rounded-l ">
-            <div class="text-xl flex  font-mono ">
-                  <input v-model="searchTerm" class="border-2  p-1 border-black" type="text">
-            <button @click="findRecipe('search')" class="bg-orange-600 p-2"><i class="text-white fa-solid fa-magnifying-glass"></i></button>
+        <div class="  p-6  ">
+            <div class="relative text-md flex  font-mono ">
+           <input v-model="searchTerm" class=" w-96 p-2  border-black" type="text" placeholder="search recipes">
+            <button  @click="findRecipe('search')" class="absolute right-0 bg-orange-600 p-2"><i class="text-white fa-solid fa-magnifying-glass"></i></button>
 
             </div>
         </div>
@@ -227,10 +235,16 @@ const recipes2 = computed(() => searchResult.value?.food ?? [])
         <div   class="grow min-w-ful p-8 scrollbar-hide  overflow-scroll ">
             <!-- <div class="text-xl text-black font-bold ">{{recipes}} result found</div> -->
             <div v-if="searchTime" class="flex md:flex-row  flex-col justify-evenly  flex-wrap   border-b-2">
+                <div v-if="searchLoading" class="animate-spin text-9xl inline-block w-20 h-20 border-[3px] border-current border-t-transparent text-orange-600 rounded-full" role="status" aria-label="loading">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <card class="basis-1/4 mx-1 m-8" v-for="recipe in recipes2" :key="recipe" :food="recipe"></card>
             </div>
 
             <div v-if="filterTime" class="flex md:flex-row  flex-col justify-evenly  flex-wrap   border-b-2">
+             <div v-if="filterLoading" class="animate-spin text-9xl inline-block w-20 h-20 border-[3px] border-current border-t-transparent text-orange-600 rounded-full" role="status" aria-label="loading">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <card class="basis-1/4 mx-1 m-8" v-for="recipe in recipes1" :key="recipe" :food="recipe"></card>
             </div>
         

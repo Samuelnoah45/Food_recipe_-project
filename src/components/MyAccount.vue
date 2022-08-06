@@ -72,8 +72,20 @@ onDone(result => {
                         <input class="border-2 p-2 border-gray-300" disabled type="text" :value="userStore.user.email">
                     </div>
                 </div>
-                <div class="flex-1 ">
-
+                <div class="flex-1 flex ">
+                <div class="flex basis-1/4 items-center justify-center flex-col space-y-8 w-full">
+                    <div class="font-bold">change profile image</div>
+                        <label class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300" >
+                            <div class="flex flex-col items-center justify-center pt-7">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                                    </svg>
+                            <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                        Select a images </p>
+                                </div>
+                                <input  @change="handleImage" class="opacity-0" ref="file" type="file" accept="image/*" multiple name="image" id=""/>
+                            </label>
+                    </div>
                 </div>
 
             </div>

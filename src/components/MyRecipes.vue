@@ -45,9 +45,8 @@ console.log(recipes)
         Other users will see the recipes.
     </div>
 </div>
-<div class="flex md:flex-row flex-col justify-evenly  flex-wrap  border-b-2">
-
-  <card class="basis-1/4 mx-1 mb-4 " v-for="recipe in recipes" :key="recipe" :hideName="true" :food="recipe"></card>
+<div class="flex md:flex-row flex-col justify-evenly px-4 flex-wrap  border-b-2">
+  <card class="basis-1/4 mx-4 mb-4 " v-for="recipe in recipes" :key="recipe" :hideName="true" :food="recipe"></card>
 </div>
 </template>
 

@@ -47,7 +47,7 @@ const foodImage = "../image/homepage.jpg";
                 </div>
                 <div class=" text-md font-extrabold p-2 flex justify-between">
                     <span class="self-start">
-                        {{food.category }}{{food.id}}
+                        {{food.category }}
                     </span>
                     <span class="space-x-2">
                         <i class="fa-solid fa-clock"></i><span>{{food.duration}}min</span>

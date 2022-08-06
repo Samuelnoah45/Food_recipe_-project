@@ -72,7 +72,7 @@ onResult((result)=>{
 <template>
   <div class="register">
     <nav-bar></nav-bar>
-    <div class=" auth bg-no-repeat bg-cover bg-center relative">
+    <div class=" auth bg-no-repeat bg-cover bg-center relative pt-10">
       <div class="back absolute bg-gradient-to-l from-orange-600 to-orange-400 opacity-75 inset-0 z-0" ></div>
        <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div class="flex justify-center self-center z-10">

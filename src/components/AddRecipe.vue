@@ -8,11 +8,13 @@ import {  useMutation} from '@vue/apollo-composable';
 import {  useQuery} from '@vue/apollo-composable';
 import upload from '../graphql/query/uploadImage.gql'
 import AddFood from '../graphql/mutation/insertFood.gql'
-import { useUserStore} from '../store/userInfo'
+import { useUserStore } from '../store/userInfo'
+import { useRouter } from 'vue-router';
+
+const router =useRouter()
 const userStore = useUserStore();
 
 //object to store  ingredients of foods
-
 const ingredients = ref([{
     amount: 0,
     food_id: null,
@@ -48,13 +50,20 @@ const queryOptions = ref({
 })
 
 //insertion for Ingredient
-const { mutate: insertAll, loading: loadingInsert} = useMutation(insertFoodinfo, () => ({
+const { mutate: insertAll, loading: loadingInsert ,onDone:insertAllDone} = useMutation(insertFoodinfo, () => ({
     variables: {
         object1: ingredients.value,
         object2: steps.value,
         object3: urls.value,
     },
 }))
+
+insertAllDone(() =>
+{
+
+ router.push({ name: 'detail', params: { id:Food_id.value }})
+    
+})
 
 //insertion for food
 const {  mutate: insertFood,  onDone,  loading: LoadingImage} = useMutation(AddFood, () => ({
@@ -135,7 +144,7 @@ const submit = () =>
                 ingredients.value[ingredients.value.length - 1].unit != "" &&
                 ingredients.value[ingredients.value.length - 1].amount != 0) {
                 IngError.value = false;
-                console.log("amqoqhc");
+                
                 insertFood();
                 onDone(result => {
                     Food_id.value = result.data.insert_food_one.id
@@ -188,7 +197,7 @@ const post = () => {
     queryOptions.value.enabled = true
 }
 const schema = Yup.object().shape({
-    title: Yup.string().required('Email is required'),
+    title: Yup.string().required('Title is required'),
     duration: Yup.number("duration must be number").min(1,"duration must be greater than 1")
    
 });
@@ -216,7 +225,7 @@ const schema = Yup.object().shape({
 
         <div class="flex-1 space-y-10">
             <div class="flex flex-col">
-                <label for="name">Duration *</label>
+                <label for="name">Duration in min *</label>
                 <Field name="duration" :class="{ 'border-red-600': errors.duration }"  class="border-2 p-2 border-gray-300" type="number" v-model="food.duration"/>
                 <span>{{errors.duration}}</span>
             </div>
@@ -224,10 +233,11 @@ const schema = Yup.object().shape({
                 <label for="name">Category *</label>
                 <input name="category"  class="border-2 p-2 border-gray-300" type="text" v-model="food.category" list="category"/>
                 <datalist id="category">
-                    <option>lounch</option>
+                    <option>lunch</option>
                     <option>BreakFast</option>
-                    <option>diner</option>
+                    <option>dinner</option>
                     <option>snack</option>
+                    <option>dessert</option>
                 </datalist>
 
             </div>
@@ -257,10 +267,10 @@ const schema = Yup.object().shape({
                
             </div>
             <div v-if="variables.image.length>0" class="">
-                <div class="flex flex-wrap ml-10">
-                    <div class="basis-1/4 m-2" v-for="(path ,index) in variables.image" :key="index">
+                <div class="grid grid-cols-3 ">
+                    <div class=" m-2 max-w-full" v-for="(path ,index) in variables.image" :key="index">
                         <label @click="mainImage(index)" :for="index">
-                            <img :src="path" class="pt-1 text-sm  text-gray-400 max-w-full object-cover group-hover:text-gray-600" />
+                            <img :src="path" class="pt-1  text-sm h-60 w-60 text-gray-400 max-w-full object-cover group-hover:text-gray-600" />
                         </label>
                         <div class="flex justify-between pt-2 px-2">
                             <div v-if="index==0" class="text-md font-bold rounded p-2  text-green-600">cover</div>
@@ -297,9 +307,9 @@ const schema = Yup.object().shape({
         </div>
         <div class="" v-for="(ingredient, index) in ingredients" :key="index">
             <div class="flex justify-evenly   ml-2 mt-4">
-                <input v-model="ingredient.ingredient_name" type="text" placeholder="Ingrident Name" class=" m-2 flex md:w-auto w-36 p-2 border border-gray-500 rounded" />
-                <input v-model="ingredient.amount" type="number" placeholder="Ingrident Amount " class="md:w-auto w-36 m-2 p-2 border border-gray-500 rounded" />
-                <input type="text" v-model="ingredient.unit" placeholder="Ingrident Unit" class="md:w-auto w-36 m-2  p-2 border border-gray-500 rounded" list="units" />
+                <input v-model="ingredient.ingredient_name" type="text" placeholder="Ingrident Name" class=" m-2 flex md:w-auto w-24 p-2 border border-gray-500 rounded" />
+                <input v-model="ingredient.amount" type="number" placeholder="Ingrident Amount " class="md:w-auto w-24 m-2 p-2 border border-gray-500 rounded" />
+                <input type="text" v-model="ingredient.unit" placeholder="Ingrident Unit" class="md:w-auto w-24 m-2  p-2 border border-gray-500 rounded" list="units" />
                 <datalist id="units">
                     <option>sini</option>
                     <option>cup</option>
@@ -307,7 +317,7 @@ const schema = Yup.object().shape({
                     <option>litter</option>
                     <option>gram</option>
                 </datalist>
-                <button type="button" class=" rounded-full  text-red-700 font-mono font-bold text-4xl" @click="remove(index)">
+                <button type="button" class=" rounded-full  text-red-700 font-mono font-bold text-2xl" @click="remove(index)">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -334,10 +344,10 @@ const schema = Yup.object().shape({
 
         <div class="mt-8" v-for="(step, index) in steps" :key="index">
             # step {{index+1}}
-            <div class="flex justify-evenly ml-1 mt-1">
+            <div class="flex justify-evenly ml-1 mt-1 space-x-6">
                 <textarea v-model="step.instruction" placeholder="Step instrunction" class=" p-1 border border-gray-500 rounded flex-1 m-1"></textarea>
 
-                <button type="button" class=" rounded-full  text-red-700 font-mono font-bold text-4xl" @click="removeStep(index)">
+                <button type="button" class=" rounded-full  text-red-700 font-mono font-bold text-3xl" @click="removeStep(index)">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -359,7 +369,7 @@ const schema = Yup.object().shape({
         <div class="flex justify-end">
             <button :class="{ 'border-orange-400':loadingUpload}"  type="submit" class="flex justify-start ml-2 rounded-md border px-3  py-2 bg-orange-600 text-white">
                 Submit
-                 <span v-if="loadingUpload"  class="absolute  animate-spin inline-block w-7 h-7 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading">
+                 <span v-if="loadingUpload||loadingInsert"  class="absolute  animate-spin inline-block w-7 h-7 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading">
                     <span class="sr-only">Loading...</span></span>
             </button>
             <span class="text-red-600" v-if="errors"></span>

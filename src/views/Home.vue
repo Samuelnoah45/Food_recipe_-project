@@ -1,36 +1,22 @@
 <script setup>
-import {
-    ref
-} from "vue";
+import {  ref} from "vue";
 import NavBar from "../components/NavBar.vue";
 import Card from "../components/card.vue";
 import Footer from '../components/Footer.vue'
-import {
-    useQuery,
-    useMutation
-} from "@vue/apollo-composable";
+import { useQuery, useMutation} from "@vue/apollo-composable";
 import allfoods from "../graphql/query/foods.gql";
-import {
-    useUserStore
-} from '../store/userInfo'
-import {
-    onBeforeRouteLeave,
-    useRouter
-} from 'vue-router'
+import {  useUserStore} from '../store/userInfo'
+import { onBeforeRouteLeave, useRouter } from 'vue-router'
+import { useRoute } from "vue-router";
 const userStore = useUserStore();
+const route=useRoute()
 const router = useRouter();
+const searchQuery=ref('')
 let varibales = ref({
     id: 10
 })
 console.log(userStore.user);
-const {
-    result,
-    onResult,
-    loading,
-    onError,
-    variables,
-    fetchMore
-} = useQuery(allfoods, () => ({
+const {result,onResult,loading,onError,variables,fetchMore} = useQuery(allfoods, () => ({
     offset: userStore.user.pageNumber * 12 - 12,
     limit: 12
 
@@ -41,8 +27,8 @@ let total = ref();
 onResult(({
     data
 }) => {
-    console.log(result.value)
-    total = result.value.food_aggregate.aggregate.count;
+   
+    // total = result.value.food_aggregate.aggregate.count;
     const itemPerPage = 5;
 
 });
@@ -71,7 +57,7 @@ const onClickHandler = (page) => {
 
     })
 
-    console.log(result)
+     window.scrollTo(0,0);
 
 };
 
@@ -80,34 +66,41 @@ onBeforeRouteLeave((to, from) => {
 
 })
 
-window.onscroll = () => {
-    let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+const searchRecipes = () =>
+{
+    console.log(searchQuery.value);
+   router.push({name:"search" ,query:{search:searchQuery.value}})
 
-    if (bottomOfWindow) {
+    
+}
 
-        console.log("fetch it");
-    }
-};
+// window.onscroll = () => {
+//     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+//     if (bottomOfWindow) {
+
+//         console.log("fetch it");
+//     }
+// };
 </script>
 <template>
-<div>
+
     <div>
-        <NavBar></NavBar>
+    <NavBar></NavBar>
     </div>
     <div class="flex h-screen flex-col ">
-    <div class="header relative grid basis-8/12  justify-center items-center space-y-16 bg-amber-50 pt-20 pb-20">
-        <div class="sreach-box  flex justify-center">
-            <div class="">
-                <input  type="text" class="p-2 mr-4  " placeholder="search recipe">
-                <span class="icon p-2 text-white text-lg bg-orange-700">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </span>
+    <div class="header relative grid basis-8/12  justify-center items-center space-y-16 bg-amber-50 pt-20 ">
+        <div class="sreach-box  flex justify-center pt-10">
+            <div class="flex flex-col items-center space-y-10">
+                  <div class="text-white font-extrabold md:text-5xl self-end text-2xl text-center">“Good food changes the mood.<br> try new recipes with us.”</div>
+                  <div class="relative">
+                      <input  v-model="searchQuery" type="text" class="p-2 w-96" placeholder="search recipe">
+                      <span @click="searchRecipes" class="icon p-2 absolute right-0 text-white text-md bg-orange-700">
+                          <i  class="fa-solid fa-magnifying-glass"></i>
+                      </span>
+                  </div>
             </div>
-
         </div>
-      
-      
-
     </div>
   </div>
     <div v-if="loading" class="relative -top-52 min-h-[40rem] flex flex-col ">
@@ -121,7 +114,7 @@ window.onscroll = () => {
     </div>
     <div v-else class="relative md:-top-64  -top-52 flex flex-col  items-center w-full">
         
-             <div class="cook text-3xl mb-10 font-sans font-extrabold text-black">WHAT TO COOK TONIGHT</div>
+             <div class="cook text-3xl mb-10 font-sans font-extrabold text-black">WHAT TO COOK TODAy</div>
         <div class="w-full flex justify-center">
            <div class="homeCard md:grid-cols-3 md:grid   md:col-start-2 md:col-end-6 ">
                <Card  class="m-6 flex-shrink-0" v-for="food in   result.food" :key="food" :food="food" ></Card>
@@ -130,15 +123,12 @@ window.onscroll = () => {
         </div>
         <div>
             <vue-awesome-paginate class="self-center  m-4 mt-6" :total-items="result.food_aggregate.aggregate.count" :items-per-page="12" :max-pages-shown="7" :current-page="userStore.user.pageNumber" :on-click="onClickHandler" />
-
         </div>
     </div>
     <Footer></Footer>
-</div>
+
 </template>
-
 <style>
-
 .homeCard{
     width:1000px
 
@@ -180,7 +170,7 @@ window.onscroll = () => {
 }
 
 .header{
-background-image: url('../../public/black2.jpeg');
+background-image: url('../../public/black2.jpeg'), linear-gradient(#e66465, #9198e5);;
 background-size: cover;
 
 }

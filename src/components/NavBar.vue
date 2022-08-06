@@ -55,9 +55,9 @@ router.push({path:'/profile'})
 
         <div class=" flex   justify-between w-full p-4  text-gray-700" id="mobile-menus">
             <div class="flex  flex-g text-md ">
-                <button><i class="fa-solid fa-bars"></i></button>
-                <div class="ml-6 font-sans font-bold text-xl text-orange-600"><span>
-                        <router-link to="/">SKYRecipe</router-link>
+               
+                <div class="ml-6 self-center font-sans font-bold text-2xl text-orange-600"><span>
+                        <router-link to="/">SkyRecipe <i class="fa-solid fa-utensils"></i></router-link>
                     </span>
                 </div>
             </div>
@@ -77,7 +77,7 @@ router.push({path:'/profile'})
                        <img  @click="pushToProfile" class="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/public/pr.jpg" alt="">
                         <router-link to="/profile"></router-link>
                     </li>
-                    <li v-if="userInfo.user.active">
+                    <li class="self-center" v-if="userInfo.user.active">
                         <router-link @click="logout" to="/login">logout</router-link>
                     </li>
                 </ul>

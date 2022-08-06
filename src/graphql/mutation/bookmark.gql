@@ -1,0 +1,5 @@
+mutation  booking($object: Booking_insert_input!){
+  insert_Booking_one(object:$object){
+      foodId
+  }
+}

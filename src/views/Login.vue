@@ -7,10 +7,10 @@ import { useRouter, useRoute, onBeforeRouteLeave} from 'vue-router'
 
 import { useQuery} from "@vue/apollo-composable"
 import login from '../graphql/auth/login.gql'
+import bookmark from '../graphql/mutation/bookmark.gql'
 import {  useUserStore} from '../store/userInfo'
 const router = useRouter();
 const userStore = useUserStore();
-
 
 
 
@@ -32,10 +32,10 @@ const password = ref();
 const queryOptions = ref({enabled: false})
 const { result, onResult, onError, loading} = useQuery(login, variables, queryOptions);
 
-function busi() {
-    checkAccount();
+// function busi() {
+//     checkAccount();
 
-}
+// }
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
@@ -86,7 +86,7 @@ async function checkAccount() {
 <template>
 <div class="login">
     <nav-bar></nav-bar>
-    <div class="auth bg-no-repeat bg-cover bg-center relative" style="">
+    <div class="auth bg-no-repeat bg-cover bg-center relative pt-4" style="">
      <div class="back absolute bg-gradient-to-l from-orange-600 to-orange-400 opacity-75 inset-0 z-1"></div>
         <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
             <div class="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">

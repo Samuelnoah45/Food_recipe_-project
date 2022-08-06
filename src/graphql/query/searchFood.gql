@@ -1,5 +1,5 @@
-query food($offset: Int, $limit: Int, $searchTerm: [food_bool_exp!]) {
-  food(offset: $offset, limit: $limit, where: {_or:$searchTerm}){
+query food($offset: Int, $limit: Int, $searchTerm: String!) {
+  food(offset: $offset, limit: $limit, where:{title:{_ilike:$searchTerm}}){
     id
     category
     title
@@ -13,6 +13,9 @@ query food($offset: Int, $limit: Int, $searchTerm: [food_bool_exp!]) {
           rating
         }
       }
+    }
+     images {
+      url
     }
   }
   food_aggregate {
