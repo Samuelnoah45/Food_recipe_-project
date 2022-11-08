@@ -8,7 +8,14 @@ export default defineConfig({
   plugins: [vue(),
     gql(),
 
-  
-  ]
+  ],
+  build: {
+    rollupOptions: {
+      external: [
+        "graphql", // ignore react stuff
+        
+      ],
+    },
+  },
 
 })
