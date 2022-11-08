@@ -1,4 +1,4 @@
-query detail($id: Int) {
+query detail($id: uuid) {
   food(where: {id: {_eq: $id}}) {
     title
     duration
@@ -11,9 +11,11 @@ query detail($id: Int) {
       url
     }
     steps(order_by: {stepNumber: asc}) {
+      id
       instruction
+      stepNumber
     }
-    rating_aggregate {
+    ratings_aggregate {
       aggregate {
         count(columns: created_at)
         avg {
@@ -22,6 +24,7 @@ query detail($id: Int) {
       }
     }
     Ingredients {
+      Ingredient_id
       amount
       ingredient_name
       unit

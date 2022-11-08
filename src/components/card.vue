@@ -22,13 +22,19 @@ router.push({ name: 'detail', params: { id } })
     
 }
 
+const edit = (id) =>
+{
+router.replace({ name: 'edit', params: { id } })
+    
+}
+
 // const foods = ref(props.foods);
 const foodImage = "../image/homepage.jpg";
 </script>
 
 <template>
-  
-        <div @click="detail(food.id)" class="md:block  flex  bg-white rounded-lg  shadow-xl bg-gray-">
+        <div @click="!hideName? detail(food.id):edit(food.id)" class="md:block  flex  bg-white rounded-lg  shadow-xl bg-gray-">
+    
             <div class="flex-1 w-full max-h-48 max-w-lg  shrink-0 rounded-t-lg h-64 shadow-2xl overflow-hidden relative">
                 <img v-if="food.images.length>0" class="absolute inset-0 min-h-full object-cover"  :src="food.images[0].url" alt="">
                 <img v-else class="absolute inset-0 min-h-full object-cover " src="../assets/images/homepage.jpg" alt="" />
@@ -54,7 +60,7 @@ const foodImage = "../image/homepage.jpg";
                     </span>
                 </div>
                 <div class="text-left text-lg flex flex-col ">
-                    <div class="text-left text-sm text-orange-600 my-2 px-2 " :set="(averageRate =food.rating_aggregate.aggregate.avg.rating)">
+                    <div class="text-left text-sm text-orange-600 my-2 px-2 " :set="(averageRate =food.ratings_aggregate.aggregate.avg.rating)">
 
                         <span class="text-gray-500 pr-2">Rating</span>
                         <div v-if="averageRate">

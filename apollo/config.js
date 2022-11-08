@@ -9,10 +9,9 @@ let httpLink;
 console.log(token.getCookie("foodRecipeUser"));
 if (token.getCookie("foodRecipeUser") !="") {
    httpLink = createHttpLink({
-  uri: "http://localhost:8080/v1/graphql",
+  uri: "https://accurate-vervet-15.hasura.app/v1/graphql",
   headers: {
     "content-type": "application/json",
-    //  "x-hasura-admin-secret": "skyisbluesamuelnoah",
      "Authorization":auth
 }
 });
@@ -20,14 +19,12 @@ console.log("auth")
 }
 else {
    httpLink = createHttpLink({
-  uri: "http://localhost:8080/v1/graphql",
+  uri: "https://accurate-vervet-15.hasura.app/v1/graphql",
   headers: {
     "content-type": "application/json",
-    // "x-hasura-admin-secret": "skyisbluesamuelnoah",
-    //  "Authorization":auth
 }
   });
-console.log("noauth")
+
   
 }
 

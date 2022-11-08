@@ -4,5 +4,6 @@
     name
     token
     userId
+    image
   }
 }

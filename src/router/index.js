@@ -7,6 +7,7 @@ import NotFound from '../views/NotFound.vue'
 import Profile from '../views/profile.vue'
 import check from '../../Authentication/cookie';
 import SearchResult from '../views/SearchResult.vue'
+import edit from  '../views/editRecipe.vue'
 
 
 const routes = [
@@ -45,6 +46,12 @@ const routes = [
         
     },
     {
+        path: '/edit/:id',
+        name: 'edit',
+        component: edit,
+        
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: NotFound
@@ -63,44 +70,44 @@ const router = createRouter({
   },
 })
 
-router.beforeEach(async (to, from) =>
-{
-    const user = JSON.parse(localStorage.getItem("state"))
-     const  Authenticated=user.userStore.user.active;
-  if (
-    // make sure the user is authenticated else
+// router.beforeEach(async (to, from) =>
+// {
+//     const user = JSON.parse(localStorage.getItem("state"))
+//      const  Authenticated=user.userStore.user.active;
+//   if (
+//     // make sure the user is authenticated else
       
-      !Authenticated &&
-      to.name !== 'Login' &&
-      to.name !== 'Signup' &&
-      to.name !== 'detail' &&
-      to.name !== 'Home'
-  ) {
-    // redirect the user to the login page
-    return { name: 'Login' }
-  }
+//       !Authenticated &&
+//       to.name !== 'Login' &&
+//       to.name !== 'Signup' &&
+//       to.name !== 'detail' &&
+//       to.name !== 'Home'
+//   ) {
+//     // redirect the user to the login page
+//     return { name: 'Login' }
+//   }
     
-    if (
-    // make sure the user is logged out
+//     if (
+//     // make sure the user is logged out
       
-      Authenticated &&
-      to.name == 'Signup' 
+//       Authenticated &&
+//       to.name == 'Signup' 
      
-  ) {
-    // redirect the user to the login page
-    return { name:'profile' }
-    }
+//   ) {
+//     // redirect the user to the login page
+//     return { name:'profile' }
+//     }
   
-   if (
-    // make sure the user is authenticated
+//    if (
+//     // make sure the user is authenticated
       
-      Authenticated &&
-      to.name == 'Login'
+//       Authenticated &&
+//       to.name == 'Login'
      
-  ) {
-    // redirect the user to the login page
-    return { name:'profile' }
-  }
-})
+//   ) {
+//     // redirect the user to the login page
+//     return { name:'profile' }
+//   }
+// })
 
 export default router

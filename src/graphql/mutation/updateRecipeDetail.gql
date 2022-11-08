@@ -1,0 +1,11 @@
+mutation ($update: food_set_input, $id: uuid!, $stepObj: [steps_updates!]!, $ingObj: [Ingredients_updates!]!) {
+  update_food(where: {id:{_eq:$id}}, _set:$update){
+    affected_rows
+  }
+  update_Ingredients_many(updates: $ingObj) {
+    affected_rows
+  }
+  update_steps_many(updates: $stepObj) {
+    affected_rows
+  }
+}

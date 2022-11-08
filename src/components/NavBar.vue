@@ -74,7 +74,7 @@ router.push({path:'/profile'})
                         <router-link to="/login">sign in</router-link>
                     </li>
                     <li v-if="userInfo.user.active">
-                       <img  @click="pushToProfile" class="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/public/pr.jpg" alt="">
+                       <img  @click="pushToProfile" class="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" :src="userInfo.user.image" alt="">
                         <router-link to="/profile"></router-link>
                     </li>
                     <li class="self-center" v-if="userInfo.user.active">

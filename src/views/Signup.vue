@@ -39,7 +39,7 @@ const variables=ref({
 })
 
 
-const queryOptions = ref({ enabled: false })  
+const queryOptions = ref({ enabled: false ,fetchPolicy: "network-only" })  
 const { result, onResult ,loading} = useQuery(register, variables, queryOptions);
 const confirmPassword = () =>
 {

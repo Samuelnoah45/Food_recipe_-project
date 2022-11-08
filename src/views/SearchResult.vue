@@ -22,10 +22,14 @@ const category=ref("")
 const include = ref([])
 // const notInclude = ref([])
 const filterOption = ref({
-    enabled: false
+    enabled: false,
+    fetchPolicy: "network-only" 
+
 })
 const searchOption = ref({
-    enabled: false
+    enabled: false,
+    fetchPolicy: "network-only" 
+
 })
 let findOption = ref();
 

@@ -38,10 +38,10 @@ const rating = ref({
 })
 
 
-food_Id.value = parseInt(router.params.id)
+food_Id.value =router.params.id
 //query from recipe detail
 const {result,onResult,onError,loading} = useQuery(RecipeDetail, {
-    id: parseInt(router.params.id)
+    id: router.params.id
 })
 
 //mutation from recipes comment and rating
@@ -124,7 +124,7 @@ reviewsError(() =>
     <div v-else class="profile p-8  flex flex-col space-y-10 ">
         <div class="flex flex-col space-y-10">
             <div v-if="result" class="text-4xl text-black  font-bold">{{result.food[0].title}} </div>
-            <div class="flex  space-x-4" :set="(averageRate =result.food[0].rating_aggregate.aggregate.avg.rating)">
+            <div class="flex  space-x-4" :set="(averageRate =result.food[0].ratings_aggregate.aggregate.avg.rating)">
                 <div v-if="averageRate" class="text-orange-600">
                     <span v-for="n in 5" :key="n">
                         <i class="fa-solid fa-star" v-if="n <= averageRate"></i>
@@ -133,7 +133,7 @@ reviewsError(() =>
                     </span>
                 </div>
                 <span>
-                    {{result.food[0].rating_aggregate.aggregate.count}} Rating
+                    {{result.food[0].ratings_aggregate.aggregate.count}} Rating
                 </span>
                 <span>
                     {{result.food[0].comments_aggregate.aggregate.count}} Reviwes
@@ -184,25 +184,9 @@ reviewsError(() =>
 
             <div class="grid grid-cols-2 gap-y-4 gap-x-4 p-3 self-start basis-1/2">
                 <div class="col-span-2 flex justify-center text-2xl font-bold"><span>Ingredients</span></div>
-                <div class="flex space-x-3">
-                    <i class="fa-solid fa-spoon"></i>
-                    <span>Lorem ipsum dolor sit amet consectetur.</span>
-
-                </div>
-                <div class="flex space-x-3">
-                    <i class="fa-solid fa-spoon"></i>
-                    <span>Lorem ipsum dolor sit amet consectetur.</span>
-
-                </div>
-                <div class="flex space-x-3">
-                    <i class="fa-solid fa-spoon"></i>
-                    <span>Lorem ipsum dolor sit amet consectetur.</span>
-
-                </div>
-                <div class="flex space-x-3">
-                    <i class="fa-solid fa-spoon"></i>
-                    <span>Lorem ipsum dolor sit amet consectetur.</span>
-                </div>
+              
+                
+             
                 <div v-for="ingredien in result.food[0].Ingredients" :key="ingredien" class="flex space-x-3">
                     <i class="fa-solid fa-spoon"></i>
                     <span>{{ingredien.amount}} {{ingredien.unit}} of {{ingredien.ingredient_name}}</span>
@@ -221,30 +205,9 @@ reviewsError(() =>
                     </div>
                     <div>{{steps.instruction}}</div>
                 </div>
-                <div class="flex flex-col space-y-3">
-                    <div class="flex space-x-3  ">
-                        <i class="self-center text-2xl font-bold text-orange-600 fa-regular fa-circle-check"></i>
-                        <span class="text-xl font-bold">step 2</span>
-                    </div>
-                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, omnis.</div>
-                </div>
-                <div class="flex flex-col space-y-3">
-                    <div class="flex space-x-3  ">
-                        <i class="self-center text-2xl font-bold text-orange-600 fa-regular fa-circle-check"></i>
-                        <span class="text-xl font-bold">step 3</span>
-                    </div>
-                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, omnis.</div>
-                </div>
-                <div class="flex flex-col space-y-3">
-                    <div class="flex space-x-3  ">
-                        <i class="self-center text-lg font-bold text-orange-600 fa-regular fa-circle-check"></i>
-                        <span class="text-xl font-bold">step 4</span>
-                    </div>
-                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, omnis.</div>
-                </div>
             </div>
         </div>
-        <div id="reviews"></div>
+        <!-- <div id="reviews"></div> -->
         <div  class="p-4 flex border-b-2 border-gray-400 pb-11  flex-col space-y-6 space-x-10 ">
             <div class="text-2xl text-black font-bold">Reviews</div>
             <div class="flex  items-center flex-col space-y-10">
@@ -268,7 +231,7 @@ reviewsError(() =>
                         <span v-if="reviewLoading" a class=" absolute animate-spin  left-14 text-9xl inline-block w-9 h-9 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
                     </button>
 
-                   <div class="absolute w-full h-screen "></div>
+                   <!-- <div class="absolute w-full h-screen "></div> -->
                     <div v-if="commentSuccess" class="text-green-600">Thanks for your comment</div>
                     <div v-if="commentError" class="text-red-600">sorry you reviewed first </div>
                 </div>
@@ -294,60 +257,9 @@ reviewsError(() =>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt architecto odio numquam doloremque doloribus?
                 </div>
             </div>
-            <div class="flex flex-col space-y-4 border-b-2 border-gray-400/25 pb-11 ">
-                <div class="flex space-x-4">
-                    <i class="text-4xl fa-solid fa-circle-user"></i>
-                    <span>samuel</span>
-                </div>
-                <div class="flex space-x-3">
-                    <div class="text-orange-600">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div>12/34/2021</div>
-                </div>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt architecto odio numquam doloremque doloribus?
-                </div>
-            </div>
-            <div class="flex flex-col space-y-4 border-b-2 border-gray-400/25 pb-11 ">
-                <div class="flex space-x-4">
-                    <i class="text-4xl fa-solid fa-circle-user"></i>
-                    <span>samuel</span>
-                </div>
-                <div class="flex space-x-3">
-                    <div class="text-orange-600">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div>12/34/2021</div>
-                </div>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt architecto odio numquam doloremque doloribus?
-                </div>
-            </div>
-            <div class="flex flex-col space-y-4 border-b-2 border-gray-400/25 pb-11 ">
-                <div class="flex space-x-4">
-                    <i class="text-4xl fa-solid fa-circle-user"></i>
-                    <span>samuel</span>
-                </div>
-                <div class="flex space-x-3">
-                    <div class="text-orange-600">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div>12/34/2021</div>
-                </div>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt architecto odio numquam doloremque doloribus?
-                </div>
-            </div>
+           
+           
+           
 
         </div>
 

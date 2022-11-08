@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue';
-import { set } from 'pinia/node_modules/vue-demi';
+// import { set } from 'pinia/node_modules/vue-demi';
 export const useUserStore = defineStore('userStore', ()=>{
   
   const  user=ref( {
           name: "",
           email: "",
-          // token:"",
+          image:"",
           active:false,
           pageNumber: 1,
           userId: 0,
@@ -20,7 +20,7 @@ export const useUserStore = defineStore('userStore', ()=>{
           user.value.active = true;
           user.value.userId=data.userId
           user.value.pageNumber = 1
-          // user.value.token=data.token
+          user.value.image=data.image
       
     }
  function  setPage(page){

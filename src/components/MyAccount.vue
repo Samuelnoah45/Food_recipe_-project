@@ -49,7 +49,7 @@ onDone(result => {
         <!-- //profile setting -->
         <div class="flex justify-between p-8">
             <div class="text-3xl font-serif text-black font-bold">Profile Settings</div>
-            <div class="bg-orange-600 flex justify-center items-center text-white p-2 rounded shadow-md">
+            <div class="bg-orange-400 flex justify-center items-center text-white p-2 font-semibold  rounded shadow-md">
                 <button disabled class="">Save Change</button></div>
         </div>
         <div class="p-8 ">
@@ -123,10 +123,10 @@ onDone(result => {
                         <div v-else class="text-red-600 text-lg">Incorrect old password</div>
                     </div>
                     <button v-if="!loading" @click="change" type="submit" class=" w-44 flex  justify-center  bg-orange-400  hover:bg-orange-500  text-gray-100  p-3  rounded-full  tracking-wide  font-semibold shadow-lgcursor-pointer">
-                        Sign in
+                        change
                     </button>
                     <button v-else type="submit" class=" w-44 flex justify-center bg-orange-400/70 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer ">
-                        sign in
+                        change
                         <span a class=" absolute animate-spin text-9xl inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading">
                         </span>
                     </button>

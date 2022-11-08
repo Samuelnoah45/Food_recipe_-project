@@ -1,4 +1,4 @@
-query food($offset: Int, $limit: Int,$id:Int!) {
+query food($offset: Int, $limit: Int,$id:uuid!) {
   food(offset: $offset, limit: $limit where: {user_id: {_eq: $id}}) {
     id
     category
@@ -7,7 +7,7 @@ query food($offset: Int, $limit: Int,$id:Int!) {
     user {
       name
     }
-    rating_aggregate {
+    ratings_aggregate {
       aggregate {
         avg {
           rating

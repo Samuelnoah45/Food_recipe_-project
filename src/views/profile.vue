@@ -43,7 +43,7 @@ onBeforeRouteLeave((to, from) => {
             <div class="md:mr-8 m-0   flex-shrink-0 md:sticky top-24 bg-white shadow-lg  md:self-start md:pb-36 pb-2">
                 <div class="grid grid-cols-3 pt-4 ">
                     <div class="flex  justify-center items-center p-2">
-                       <img class="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="../../public/pr.jpg" alt="">
+                       <img class="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" :src="userStore.user.image" alt="">
                     </div>
                     <div class="sky uppercase w-44 col-span-2 font-mono font-bold text-md flex items-center">
                       hi   {{userStore.user.name}}
@@ -71,10 +71,7 @@ onBeforeRouteLeave((to, from) => {
                         <span class="text-2xl self-center"><i class="fa-solid fa-bell"></i></span>
                         <span class="md:text-lg md:min-w-full text-xs">Notification</span>
                     </button>
-                    <button @click="comp=AddRecipe,userStore.setActiveBtn('btn6')" :class="{active: activeBtn === 'btn6' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600" to="">
-                        <span class="text-2xl self-center"><i class="fa-brands fa-gratipay"></i></span>
-                        <span class="md:text-lg md:min-w-full text-xs">favorite</span>
-                    </button>
+                 
 
                 </div>
 

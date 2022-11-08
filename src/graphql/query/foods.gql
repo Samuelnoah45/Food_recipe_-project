@@ -7,7 +7,7 @@ query food($offset: Int, $limit: Int) {
     user {
       name
     }
-    rating_aggregate {
+    ratings_aggregate {
       aggregate {
         avg {
           rating

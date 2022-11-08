@@ -29,7 +29,8 @@ const show = ref(false);
 const variables = ref({emails: "",password: ""});
 
 const password = ref();
-const queryOptions = ref({enabled: false})
+const queryOptions = ref({enabled: false,fetchPolicy: "network-only" })
+    fetchPolicy: "network-only" 
 const { result, onResult, onError, loading} = useQuery(login, variables, queryOptions);
 
 // function busi() {
