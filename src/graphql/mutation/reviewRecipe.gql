@@ -1,5 +1,5 @@
-mutation reviews($comment:[comment_insert_input!]!,$rating:[rating_insert_input!]!,){
-  insert_comment(objects:$comment){
+mutation reviews($comment:[comments_insert_input!]!,$rating:[rating_insert_input!]!,){
+  insert_comments(objects:$comment){
     affected_rows
   }
   

@@ -20,27 +20,27 @@ const food_Id = ref({ id: 18 })
 //comment object 
 const comment = ref({
     comment: "",
-    food_id: parseInt(router.params.id),
+    food_id:router.params.id,
     user_id: userStore.user.userId
 })
 
 //bookmark object 
 const bookmark =ref({
-     foodId: parseInt(router.params.id),
+     foodId:router.params.id,
      userId: userStore.user.userId
 })
 
 //rating object 
 const rating = ref({
     rating:0,
-    food_id: parseInt(router.params.id),
+    food_id:router.params.id,
     user_id: userStore.user.userId
 })
 
 
 food_Id.value =router.params.id
 //query from recipe detail
-const {result,onResult,onError,loading} = useQuery(RecipeDetail, {
+const {result,onResult,onError,loading,refetch} = useQuery(RecipeDetail, {
     id: router.params.id
 })
 
@@ -79,6 +79,7 @@ onDone(() =>
     {
     commentSuccess.value=false
     },2000)
+    refetch();
     //  route.go()
     
 })
