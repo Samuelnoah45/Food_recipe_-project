@@ -102,7 +102,7 @@ const searchRecipes = () =>
             <div class="flex flex-col items-center space-y-10">
                   <div class="text-white font-extrabold md:text-5xl self-end text-2xl text-center">“Good food changes the mood.<br> try new recipes with us.”</div>
                   <div class="relative">
-                      <input  v-model="searchQuery" type="text" class="p-2 w-96" placeholder="search recipe">
+                      <input  v-model="searchQuery" type="text" class="p-2 md:w-96 w-52" placeholder="search recipe">
                       <span @click="searchRecipes" class="icon p-2 absolute right-0 text-white text-md bg-orange-700">
                           <i  class="fa-solid fa-magnifying-glass"></i>
                       </span>
@@ -122,7 +122,7 @@ const searchRecipes = () =>
     </div>
     <div v-else class="relative md:-top-64  -top-52 flex flex-col  items-center w-full">
         
-             <div class="cook text-3xl mb-10 font-sans font-extrabold text-black">WHAT TO COOK TODAy</div>
+             <div class="cook md:text-3xl text-xl mb-10 font-sans font-extrabold text-black">WHAT TO COOK TODAY</div>
         <div class="w-full flex justify-center">
            <div class="homeCard md:grid-cols-3 md:grid   md:col-start-2 md:col-end-6 ">
                <Card  class="m-6 flex-shrink-0" v-for="food in   result.food" :key="food" :food="food" ></Card>

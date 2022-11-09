@@ -52,7 +52,7 @@ onResult((result)=>{
        userStore.setUser(data);
       cookieHandler.setCookie("foodRecipeUser",data.token,30);
       show.value=true
-    router.push({ name: "Home" });
+    router.push({ path: "/" });
   }
 })
 }
@@ -72,7 +72,7 @@ onResult((result)=>{
 <template>
   <div class="register">
     <nav-bar></nav-bar>
-    <div class=" auth bg-no-repeat bg-cover bg-center relative pt-10">
+    <div class=" auth bg-no-repeat bg-cover bg-center relative pt-20">
       <div class="back absolute bg-gradient-to-l from-orange-600 to-orange-400 opacity-75 inset-0 z-0" ></div>
        <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div class="flex justify-center self-center z-10">
@@ -103,7 +103,7 @@ onResult((result)=>{
               </div>
               <div class="space-y-1 flex flex-col">
                 <label  class="text-lg font-medium text-gray-700 tracking-wide" >confirm </label>
-                <Field name="confirm" v-model="confirmPass" :class="{'border-red-600':errors.confirm}"  class="w-full content-center text-base   px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400" type="password" placeholder="confirm your password"/>
+                <Field name="confirm"  :class="{'border-red-600':errors.confirm}"  class="w-full content-center text-base   px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400" type="password" placeholder="confirm your password"/>
                 <span class="text-sm text-red-600">{{errors.confirm}}</span>
               </div>
 

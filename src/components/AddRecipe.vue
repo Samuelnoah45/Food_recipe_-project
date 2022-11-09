@@ -265,7 +265,7 @@ const schema = Yup.object().shape({
                                     <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                         Select a images </p>
                                 </div>
-                                <Field  @change="handleImage" class="opacity-0" ref="file" type="file" accept="image/*" multiple name="image" id=""/>
+                                <Field  @change="handleImage" class="opacity-0 w-60 " ref="file" type="file" accept="image/*" multiple name="image" id=""/>
                                 <span class="text-red-600">{{errors.image}}</span>
                             </label>
                         </div>
@@ -300,7 +300,7 @@ const schema = Yup.object().shape({
 
 </div>
 
-<div class="p-8">
+<!-- <div class="p-8">
     <div class=" mt-2 p-6 border-y-2 border-gray-400 ">
         <div class="text-2xl font-bold">Ingredients </div>
         <div>
@@ -339,17 +339,17 @@ const schema = Yup.object().shape({
             </button>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="p-8">
-    <div class=" mt-2 p-6 border-y-2 border-gray-400 ">
+<div class="md:p-8 p-2">
+    <div class=" md:mt-2 mt-1 p-6 border-y-2 border-gray-400 ">
         <div class="text-2xl font-bold">Steps </div>
         <div>
             Enter step for recipe
             Enter one step per line. Include short instrunction
         </div>
 
-        <div class="mt-8" v-for="(step, index) in steps" :key="index">
+        <div class="mt-6" v-for="(step, index) in steps" :key="index">
             # step {{index+1}}
             <div class="flex justify-evenly ml-1 mt-1 space-x-6">
                 <textarea v-model="step.instruction" placeholder="Step instrunction" class=" p-1 border border-gray-500 rounded flex-1 m-1"></textarea>
