@@ -207,7 +207,7 @@ reviewsError(() =>
                 </div>
             </div>
         </div>
-        <!-- <div id="reviews"></div> -->
+        <div id="reviews"></div>
         <div  class="p-4 flex border-b-2 border-gray-400 pb-11  flex-col space-y-6 space-x-10 ">
             <div class="text-2xl text-black font-bold">Reviews</div>
             <div class="flex  items-center flex-col space-y-10">
@@ -215,7 +215,7 @@ reviewsError(() =>
                         <span>What did you think of this recipe?  comment  and rate recipe </span>
                     </div>
                      <div class="w-full flex md:flex-row flex-col space-x-10">
-                        <textarea v-model="comment.comment" class="border border-orange-600 p-4" placeholder="put you comment it will help other " name="" id="" cols="40" rows="5">
+                        <textarea v-model="comment.comment" class="border border-orange-600 p-4 w-60 md:w-100" placeholder="put you comment it will help other " name="" id="" cols="40" rows="5">
                         </textarea>
                         
                     <div class="rating self-center ">
