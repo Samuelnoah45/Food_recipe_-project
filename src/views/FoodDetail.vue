@@ -111,6 +111,15 @@ reviewsError(() =>
 
 <template>
 <Navbar></Navbar>
+<div v-if="loading" class="min-h-[45rem] flex flex-col   rounded-xl  ">
+        <div class="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
+            <div class="flex justify-center">
+                <div class="animate-spin text-4xl inline-block w-10 h-10 border-[3px] border-current border-t-transparent text-orange-600 rounded-full" role="status" aria-label="loading">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
 <div v-if="result" class="flex  justify-center pt-24  mb-8">
     <div v-if="loading" class="min-h-[45rem] flex flex-col   rounded-xl  ">
         <div class="flex flex-auto flex-col justify-center items-center p-4 md:p-5">

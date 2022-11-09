@@ -114,7 +114,7 @@ const searchRecipes = () =>
     <div v-if="loading" class="relative -top-52 min-h-[40rem] flex flex-col ">
         <div class="flex flex-auto flex-col justify-start items-center p-4 md:p-5">
             <div class="flex justify-center">
-                <div class="animate-spin text-9xl inline-block w-28 h-28 border-[3px] border-current border-t-transparent text-orange-600 rounded-full" role="status" aria-label="loading">
+                <div class="animate-spin text-9xl inline-block w-10 h-10 border-[3px] border-current border-t-transparent text-orange-600 rounded-full" role="status" aria-label="loading">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
