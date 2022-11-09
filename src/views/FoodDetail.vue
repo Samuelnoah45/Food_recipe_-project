@@ -168,7 +168,7 @@ reviewsError(() =>
             <div class="basis-3/5 max-w-xl ">
 
                 <img v-if="result.food[0].images[0]" class="object-cover rounded   max-h-96 w-full " :src="result.food[0].images[0].url" alt="">
-                <img  v-else class="object-cover h-64 rounded  " src="../../public/Screenshot_20220729_194859.png" alt="">
+                <img  v-else class="object-cover h-64 rounded  " src="" alt="">
             </div>
             <div class="flex-1 relative flex flex-col p-4 rounded text-lg  border-2 border-gray-400 space-y-3">
                 <div class="text-xl font-bold self-center  text-orange-600">Quick facts</div>
