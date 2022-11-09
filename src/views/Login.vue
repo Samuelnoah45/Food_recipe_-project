@@ -60,7 +60,7 @@ async function checkAccount() {
 
                 userStore.setUser(data);
                 router.push({
-                    name: "Home"
+                    path: "/"
                 });
                 show.value = false;
 
