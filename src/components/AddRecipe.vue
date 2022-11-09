@@ -313,9 +313,9 @@ const schema = Yup.object().shape({
             <div>Unit</div>
         </div>
         <div class="" v-for="(ingredient, index) in ingredients" :key="index">
-            <div class="flex justify-evenly   ml-2 mt-4">
+            <div class="flex justify-evenly   md:ml-2 ml-0 mt-4">
                 <input v-model="ingredient.ingredient_name" type="text" placeholder="Ingrident Name" class=" m-2 flex md:w-auto w-24 p-2 border border-gray-500 rounded" />
-                <input v-model="ingredient.amount" type="number" placeholder="Ingrident Amount " class="md:w-auto w-24 m-2 p-2 border border-gray-500 rounded" />
+                <input v-model="ingredient.amount" type="number" placeholder="Ingrident Amount " class="md:w-auto  w-10 m-2 p-2 border border-gray-500 rounded" />
                 <input type="text" v-model="ingredient.unit" placeholder="Ingrident Unit" class="md:w-auto w-24 m-2  p-2 border border-gray-500 rounded" list="units" />
                 <datalist id="units">
                     <option>sini</option>
