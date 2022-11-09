@@ -9,13 +9,13 @@ export default defineConfig({
     gql(),
 
   ],
-  // build: {
-  //   rollupOptions: {
-  //     external: [
-  //       "graphql", // 
+  build: {
+    rollupOptions: {
+      external: [
+        "graphql", // 
         
-  //     ],
-  //   },
-  // },
+      ],
+    },
+  },
 
 })
