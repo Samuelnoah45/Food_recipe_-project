@@ -300,7 +300,7 @@ const schema = Yup.object().shape({
 
 </div>
 
-<!-- <div class="p-8">
+<div class="p-8">
     <div class=" mt-2 p-6 border-y-2 border-gray-400 ">
         <div class="text-2xl font-bold">Ingredients </div>
         <div>
@@ -339,7 +339,7 @@ const schema = Yup.object().shape({
             </button>
         </div>
     </div>
-</div> -->
+</div>
 
 <div class="md:p-8 p-2">
     <div class=" md:mt-2 mt-1 p-6 border-y-2 border-gray-400 ">
