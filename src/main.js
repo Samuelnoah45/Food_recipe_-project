@@ -17,7 +17,7 @@ import { dom } from "@fortawesome/fontawesome-svg-core";
 dom.watch();
 import { createPinia } from 'pinia'
 import "vue-awesome-paginate/dist/style.css";
-// import './assets/tailwind.css'
+import './assets/tailwind.css'
 const pinia = createPinia()
 if (localStorage.getItem("state")) {
   pinia.state.value=JSON.parse(localStorage.getItem("state"))
