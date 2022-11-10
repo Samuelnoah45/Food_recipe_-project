@@ -8,6 +8,8 @@ import Profile from '../views/profile.vue'
 import check from '../../Authentication/cookie';
 import SearchResult from '../views/SearchResult.vue'
 import edit from  '../views/editRecipe.vue'
+import verification from '../views/verfication.vue'
+import verifying from '../views/verifying.vue'
 
 
 const routes = [
@@ -43,6 +45,17 @@ const routes = [
         path: '/search',
         name: 'search',
         component: SearchResult,
+        
+    },
+    {
+        path: '/verification',
+        name: 'verification',
+        component: verification,
+        
+    }, {
+        path: '/verifying',
+        name: 'verifying',
+        component: verifying,
         
     },
     {

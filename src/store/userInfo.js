@@ -21,6 +21,7 @@ export const useUserStore = defineStore('userStore', ()=>{
           user.value.userId=data.userId
           user.value.pageNumber = 1
           user.value.image=data.image
+          console.log(data);
       
     }
  function  setPage(page){

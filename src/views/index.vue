@@ -8,14 +8,11 @@ import allfoods from "../graphql/query/foods.gql";
 import {  useUserStore} from '../store/userInfo'
 import { onBeforeRouteLeave, useRouter } from 'vue-router'
 import { useRoute } from "vue-router"; 
-import bcrypt from 'bcryptjs';
+
 const userStore = useUserStore();
 const route=useRoute()
 const router = useRouter();
 const searchQuery=ref('')
- var password =  bcrypt.hashSync("12121212", 12);
-
- console.log(password=="$2b$12$FWwf/txh6HTMdtP7bCcKGurpSHbn7CPHOEoKNWjGjz8in4VGDc9Lu");
 
 let varibales = ref({
     id: 10

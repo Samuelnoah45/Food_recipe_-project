@@ -1,0 +1,8 @@
+query($token:String!){
+  verification(token:$token){
+    email
+    name
+    token
+    userId
+  }
+}

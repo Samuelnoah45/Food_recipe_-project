@@ -47,12 +47,12 @@ const confirmPassword = () =>
 onResult((result)=>{
   
   if(!result.loading){
-    console.log("sky");
-       const data=result.data.Signup
-       userStore.setUser(data);
-      cookieHandler.setCookie("foodRecipeUser",data.token,30);
+    // console.log("sky");
+    //    const data=result.data.Signup
+    //    userStore.setUser(data);
+    //   cookieHandler.setCookie("foodRecipeUser",data.token,30);
       show.value=true
-    router.push({ path: "/" });
+    router.push({ path: "/verification" });
   }
 })
 }
