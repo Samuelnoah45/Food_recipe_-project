@@ -9,7 +9,9 @@ import { useQuery, useMutation } from "@vue/apollo-composable";
 import bookmarkQuery from '../graphql/mutation/bookmark.gql'
 import { ref, computed } from 'vue';
 import { useBookmarkStore } from "../store/bookmarkInfo"
+import useNotify from "../composable/notify";
 const bookmarkStore=useBookmarkStore()
+const { notify } = useNotify();
 const router = useRoute()
 const userStore = useUserStore();
 const commentSuccess=ref(false)
@@ -74,12 +76,13 @@ onDone(() =>
 {
     comment.value.comment = "";
     rating.value.rating = 0;
-    commentSuccess.value = true
-    setTimeout(function ()
-    {
-    commentSuccess.value=false
-    },2000)
-    refetch();
+    notify({
+    title: "commented successfully",
+    description:"you have commented successfully",
+    cardClass: "bg-blue-100"
+});
+
+refetch()
     //  route.go()
     
 })
@@ -94,12 +97,11 @@ bookmarkDone(() =>
 //Error for comment and notification 
 reviewsError(() =>
 {
-    commentError.value = true;
-    setTimeout(function ()
-    {
-      commentError.value = false  
-    }
-        , 2000)
+    notify({
+    title: "Error ",
+    description:"you have already commented",
+    cardClass: "bg-red-100"
+  });
     
 })
 

@@ -11,9 +11,12 @@ import upload from '../graphql/query/uploadImage.gql'
 import AddFood from '../graphql/mutation/insertFood.gql'
 import { useUserStore } from '../store/userInfo'
 import Navbar from "../components/NavBar.vue"
+import notification from "../components/notification.vue"
+import useNotify from "../composable/notify";
 import { useRouter ,useRoute} from 'vue-router';
 
 const router =useRouter()
+const { notify } = useNotify();
 const route =useRoute()
 const userStore = useUserStore();
 const shallow = ref({
@@ -63,6 +66,11 @@ insertAllDone(() =>
 {
    refetch();
 
+   notify({
+    title: "update_successful",
+    description:"you have successfully updated the recipe",
+    cardClass: "bg-blue-100"
+  });
 //  router.push({ name: 'detail', params: { id:Food_id.value }})
     
 })
@@ -207,6 +215,7 @@ const schema = Yup.object().shape({
 });
 </script>
 <template>
+   
     <Navbar></Navbar>
     <div class="w-full flex justify-center items-center pt-24  mb-8">
     <div>

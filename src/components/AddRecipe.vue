@@ -8,9 +8,11 @@ import {  useMutation} from '@vue/apollo-composable';
 import {  useQuery} from '@vue/apollo-composable';
 import upload from '../graphql/query/uploadImage.gql'
 import AddFood from '../graphql/mutation/insertFood.gql'
+import useNotify from "../composable/notify";
+
 import { useUserStore } from '../store/userInfo'
 import { useRouter } from 'vue-router';
-
+const { notify } = useNotify();
 const router =useRouter()
 const userStore = useUserStore();
 
@@ -66,7 +68,11 @@ const { mutate: insertAll, loading: loadingInsert ,onDone:insertAllDone} = useMu
 
 insertAllDone(() =>
 {
-
+    notify({
+    title: "Created successful",
+    description:"you have successfully created the recipes",
+    cardClass: "bg-blue-100"
+  });
  router.push({ name: 'detail', params: { id:Food_id.value }})
     
 })

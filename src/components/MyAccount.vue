@@ -7,9 +7,13 @@ import {
     useQuery,
     useMutation
 } from '@vue/apollo-composable';
+import useNotify from "../composable/notify";
+
 import {
     ref
 } from 'vue';
+const { notify } = useNotify();
+
 const userStore = useUserStore();
 const newPassword = ref("");
 const oldPassword = ref("");
@@ -33,10 +37,19 @@ const {
 }))
 onDone(result => {
     console.log(result.data.changePassword.message);
+   
     if (result.data.changePassword.message == "success") {
-        changed.value = true;
+        notify({
+    title: "Changed successfully ",
+    description:"you have changed password successfully",
+    cardClass: "bg-blue-100"
+  });
     } else {
-        changed.value = false;
+        notify({
+    title: "Error",
+    description:"Incorrect old password",
+    cardClass: "bg-blue-100"
+  });
 
     }
 
@@ -118,10 +131,7 @@ onDone(result => {
             </div>
             <div class="border-x-2 border-b-2 p-6 flex justify-center">
                 <div class="flex flex-col space-y-3">
-                    <div v-if="notification">
-                        <div v-if="changed" class="text-green-600 text-lg">changed successfully</div>
-                        <div v-else class="text-red-600 text-lg">Incorrect old password</div>
-                    </div>
+                   
                     <button v-if="!loading" @click="change" type="submit" class=" w-44 flex  justify-center  bg-orange-400  hover:bg-orange-500  text-gray-100  p-3  rounded-full  tracking-wide  font-semibold shadow-lgcursor-pointer">
                         change
                     </button>

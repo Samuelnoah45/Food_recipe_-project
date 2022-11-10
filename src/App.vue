@@ -3,14 +3,15 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 // import HelloWorld from './components/HelloWorld.vue'
 import { useRoute } from 'vue-router';
+import  notification from './components/notification.vue'
 const route = useRoute()
 
-console.log("index");
+
 </script>
 
 <template>
   <router-view  />
- 
+ <notification></notification>
 </template>
 
 <style>
