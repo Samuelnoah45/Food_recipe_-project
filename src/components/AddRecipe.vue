@@ -258,11 +258,11 @@ const schema = Yup.object().shape({
         </div>
     </div>
 
-    <div class="border-y-2 border-gray-400 p-4 flex">
+    <div class="border-y-2 border-gray-400 p-0 flex">
         <div class="min-w-full">
             <div v-if="variables.image.length==0" class="flex justify-center mt-5 w-full">
                     <div class="flex basis-1/4 items-center justify-center flex-col space-y-8 w-full">
-                                <div class="font-bold">Select multi images of the recipe</div>
+                            <div class="font-bold">Select multi images of the recipe</div>
                             <label class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300" :class="{'boreder-red-600':errors.image}">
                                 <div class="flex flex-col items-center justify-center pt-7">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
@@ -279,9 +279,9 @@ const schema = Yup.object().shape({
               
                
             </div>
-            <div v-if="variables.image.length>0" class="">
-                <div class="grid grid-cols-3 ">
-                    <div class=" m-2 max-w-full" v-for="(path ,index) in variables.image" :key="index">
+            <div v-if="variables.image.length>0" class="w-full">
+                <div class="md:grid md:grid-cols-3 ">
+                    <div class=" m-2" v-for="(path ,index) in variables.image" :key="index">
                         <label @click="mainImage(index)" :for="index">
                             <img :src="path" class="pt-1  text-sm h-60 w-60 text-gray-400 max-w-full object-cover group-hover:text-gray-600" />
                         </label>

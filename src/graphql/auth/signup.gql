@@ -4,5 +4,7 @@ query($email: String!, $password: String!, $name: String!) {
   name
   email
   token
+  image
+
   
 }}
