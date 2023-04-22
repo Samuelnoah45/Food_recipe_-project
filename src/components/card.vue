@@ -36,7 +36,7 @@ const foodImage = "../image/homepage.jpg";
         <div @click="!hideName? detail(food.id):edit(food.id)" class="md:block  flex  bg-white rounded-lg  shadow-xl bg-gray-">
     
             <div class="flex-1 w-full max-h-48 max-w-lg  shrink-0 rounded-t-lg h-64 shadow-2xl overflow-hidden relative">
-                <img v-if="food.images.length>0" class="absolute inset-0 min-h-full object-cover"  :src="food.images[0].url" alt="">
+                <img v-if="food.food_images.length>0" class="absolute inset-0 min-h-full object-cover"  :src="food.food_images[0].url" alt="">
                 <img v-else class="absolute inset-0 min-h-full object-cover " src="../assets/images/homepage.jpg" alt="" />
                 <div class="absolute inset-0  bg-black bg-opacity-30"></div>
                 <div class="absolute inset-0 ">
@@ -60,7 +60,7 @@ const foodImage = "../image/homepage.jpg";
                     </span>
                 </div>
                 <div class="text-left text-lg flex flex-col ">
-                    <div class="text-left text-sm text-orange-600 my-2 px-2 " :set="(averageRate =food.ratings_aggregate.aggregate.avg.rating)">
+                    <div class="text-left text-sm text-orange-600 my-2 px-2 " :set="(averageRate =food.food_ratings_aggregate.aggregate.avg.rating)">
 
                         <span class="text-gray-500 pr-2">Rating</span>
                         <div v-if="averageRate">
@@ -77,7 +77,7 @@ const foodImage = "../image/homepage.jpg";
                         </div>
                     </div>
                     <div class="self-end mb-2">
-                        <p v-if="!hideName" class="text-sm px-2 ">created by <span class="font-serif font-bold">{{food.user.name}}</span></p>
+                        <p v-if="!hideName" class="text-sm px-2 ">created by <span class="font-serif font-bold">{{food.food_user.name}}</span></p>
                     </div>
 
                 </div>

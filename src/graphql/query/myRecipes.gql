@@ -4,17 +4,17 @@ query food($offset: Int, $limit: Int,$id:uuid!) {
     category
     title
     duration
-    user {
+    food_user {
       name
     }
-    ratings_aggregate {
+    food_ratings_aggregate {
       aggregate {
         avg {
           rating
         }
       }
     }
-      images {
+      food_images {
       url
     }
   }

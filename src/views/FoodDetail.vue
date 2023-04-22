@@ -62,8 +62,9 @@ const { mutate: bookmarkRecipe, loading: bookmarkLoading, onDone: bookmarkDone }
     }
 }))
 
-onResult(() => {
+onResult((result) => {
     const detail = computed(() => result.value?.users??[])
+    console.log(result);
 })
   
 
@@ -114,7 +115,7 @@ reviewsError(() =>
 
 <template>
 <Navbar></Navbar>
-<div v-if="loading" class="min-h-[45rem] flex flex-col   rounded-xl  ">
+<!-- <div v-if="loading" class="min-h-[45rem] flex flex-col   rounded-xl  ">
         <div class="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
             <div class="flex justify-center">
                 <div class="animate-spin text-4xl inline-block w-10 h-10 border-[3px] border-current border-t-transparent text-orange-600 rounded-full" role="status" aria-label="loading">
@@ -122,7 +123,7 @@ reviewsError(() =>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 <div v-if="result" class="flex  justify-center pt-24  mb-8">
     <div v-if="loading" class="min-h-[45rem] flex flex-col   rounded-xl  ">
         <div class="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
@@ -136,7 +137,7 @@ reviewsError(() =>
     <div v-else class="profile p-8  flex flex-col space-y-10 ">
         <div class="flex flex-col space-y-10">
             <div v-if="result" class="text-4xl text-black  font-bold">{{result.food[0].title}} </div>
-            <div class="flex  space-x-4" :set="(averageRate =result.food[0].ratings_aggregate.aggregate.avg.rating)">
+            <div class="flex  space-x-4" :set="(averageRate =result.food[0].food_ratings_aggregate.aggregate.avg.rating)">
                 <div v-if="averageRate" class="text-orange-600">
                     <span v-for="n in 5" :key="n">
                         <i class="fa-solid fa-star" v-if="n <= averageRate"></i>
@@ -145,17 +146,17 @@ reviewsError(() =>
                     </span>
                 </div>
                 <span>
-                    {{result.food[0].ratings_aggregate.aggregate.count}} Rating
+                    {{result.food[0].food_ratings_aggregate.aggregate.count}} Rating
                 </span>
                 <span>
-                    {{result.food[0].comments_aggregate.aggregate.count}} Reviwes
+                    {{result.food[0].food_comments_aggregate.aggregate.count}} Reviwes
                 </span>
             </div>
             <div>
                 {{result.food[0].description}} 
             </div>
             <div class="flex space-x-5"><i class="text-4xl fa-solid fa-circle-user"></i>
-                <span class="self-center">Recipe by {{result.food[0].user.name}} </span></div>
+                <span class="self-center">Recipe by {{result.food[0].food_user.name}} </span></div>
         </div>
 
         <div class="flex md:space-x-10 border-b-2 border-gray-400 pb-11 space-y-10 md:space-y-0 md:flex-row flex-col">
@@ -179,13 +180,13 @@ reviewsError(() =>
 
             <div class="basis-3/5 max-w-xl ">
 
-                <img v-if="result.food[0].images[0]" class="object-cover rounded   max-h-96 w-full " :src="result.food[0].images[0].url" alt="">
+                <img v-if="result.food[0].food_images[0]" class="object-cover rounded   max-h-96 w-full " :src="result.food[0].food_images[0].url" alt="">
                 <img  v-else class="object-cover h-64 rounded  " src="" alt="">
             </div>
             <div class="flex-1 relative flex flex-col p-4 rounded text-lg  border-2 border-gray-400 space-y-3">
                 <div class="text-xl font-bold self-center  text-orange-600">Quick facts</div>
                 <div>{{result.food[0].duration}} min</div>
-                <div> {{result.food[0].Ingredients_aggregate.aggregate.count}} ingredients</div>
+                <div> {{result.food[0].food_Ingredients_aggregate.aggregate.count}} ingredients</div>
                 <div> category of {{result.food[0].category}} </div>
             </div>
 
@@ -199,7 +200,7 @@ reviewsError(() =>
               
                 
              
-                <div v-for="ingredien in result.food[0].Ingredients" :key="ingredien" class="flex space-x-3">
+                <div v-for="ingredien in result.food[0].food_Ingredients" :key="ingredien" class="flex space-x-3">
                     <i class="fa-solid fa-spoon"></i>
                     <span>{{ingredien.amount}} {{ingredien.unit}} of {{ingredien.ingredient_name}}</span>
 

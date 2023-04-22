@@ -4,17 +4,17 @@ query food($offset: Int, $limit: Int, $filterTerm: [food_bool_exp!]) {
     category
     title
     duration
-    user {
+    food_user {
       name
     }
-    rating_aggregate {
+    food_ratings_aggregate {
       aggregate {
         avg {
           rating
         }
       }
     }
-    images {
+    food_images {
       url
     }
   }

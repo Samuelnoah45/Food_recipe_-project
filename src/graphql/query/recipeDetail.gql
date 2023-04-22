@@ -4,18 +4,18 @@ query detail($id: uuid) {
     duration
     description
     category
-    user {
+    food_user {
       name
     }
-    images {
+    food_images {
       url
     }
-    steps(order_by: {stepNumber: asc}) {
+    food_steps(order_by: {stepNumber: asc}) {
       id
       instruction
       stepNumber
     }
-    ratings_aggregate {
+    food_ratings_aggregate {
       aggregate {
         count(columns: created_at)
         avg {
@@ -23,18 +23,18 @@ query detail($id: uuid) {
         }
       }
     }
-    Ingredients {
+    food_Ingredients {
       Ingredient_id
       amount
       ingredient_name
       unit
     }
-    Ingredients_aggregate {
+    food_Ingredients_aggregate {
       aggregate {
         count(columns: Ingredient_id)
       }
     }
-    comments_aggregate {
+    food_comments_aggregate {
       aggregate {
         count(columns: comment)
       }
