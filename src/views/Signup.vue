@@ -3,10 +3,11 @@
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMutation, useQuery } from '@vue/apollo-composable'
-import register from '../graphql/auth/signup.gql'
+// import register from '../graphql/auth/signup.gql'
 import NavBar from '../components/NavBar.vue'
 import { useUserStore } from '../store/userInfo'
 import { Form, Field } from 'vee-validate';
+import {gql} from "graphql-tag"
 import cookieHandler from '../../Authentication/cookie'
 import * as Yup from 'yup';
 const schema = Yup.object().shape({
@@ -33,29 +34,48 @@ const userStore = useUserStore();
 
 const variables=ref({
      email:"",
-     password:"",
+     password:"", globals: true,
      name:""
 
 })
 
 
 const queryOptions = ref({ enabled: false ,fetchPolicy: "network-only" })  
-const { result, onResult ,loading} = useQuery(register, variables, queryOptions);
+const { result, onResult ,loading ,onError} = useQuery(gql`query($email: String!, $password: String!, $name: String!) {
+ Signup(email:$email,password:$password,name:$name){
+  userId
+  name
+  email
+  token
+  image
+
+  
+}}`, variables, queryOptions);
+
 const confirmPassword = () =>
 {
  queryOptions.value.enabled = true
 onResult((result)=>{
   
   if(!result.loading){
-    console.log("sky");
        const data=result.data.Signup
        userStore.setUser(data);
       cookieHandler.setCookie("foodRecipeUser",data.token,30);
       show.value=true
     router.push({ path: "/" });
   }
+  else{
+
+    queryOptions.value.enabled = false
+  }
+
 })
 }
+onError (()=>{
+  queryOptions.value.enabled = false
+})
+
+
 
 
 //setcookie function
@@ -85,25 +105,25 @@ onResult((result)=>{
             <div class="space-y-3">
               <div class="space-y-1 flex flex-col">
                 <label for="fullName"  class=" text-lg font-medium text-gray-700 tracking-wide"> Full Name </label>
-                <Field name="fullName" v-model="variables.name" :class="{'border-red-600':errors.fullName}" type="text" placeholder="Enter full name" class="px-4 py-2 w-full text-base border border-gray-300  rounded " />
+                <Field name="fullName" id="name" v-model="variables.name" :class="{'border-red-600':errors.fullName}" type="text" placeholder="Enter full name" class="px-4 py-2 w-full text-base border border-gray-300  rounded " />
                 <!-- <Field name="fullName" type="text" class="form-control" :class="{'border-red-600':errors.fullName}" /> -->
                  <span class="text-sm text-red-600">{{errors.fullName}}</span>
               </div>
 
               <div class="space-y-1 flex flex-col">
                 <label class="text-lg font-medium text-gray-700 tracking-wide" >Email</label>
-                <Field name="email"  v-model="variables.email" :class="{'border-red-600':errors.email}"  class="   w-full text-base px-4 py-2  border border-gray-300 rounded-lg  focus:outline-none focus:border-orange-400" type="" placeholder="mail@gmail.com"/>
+                <Field name="email"  id="email" v-model="variables.email" :class="{'border-red-600':errors.email}"  class="   w-full text-base px-4 py-2  border border-gray-300 rounded-lg  focus:outline-none focus:border-orange-400" type="" placeholder="mail@gmail.com"/>
                 <span class="text-sm text-red-600">{{errors.email}}</span>
               </div>
               <div class="space-y-1 flex flex-col">
                 <label class="text-lg font-medium text-gray-700 tracking-wide"> Password
                 </label>
-                <Field name="password" v-model="variables.password" :class="{'border-red-600':errors.password}"  class="w-full   content-center   text-base   px-4   py-2   border border-gray-300   rounded-lg focus:outline-none focus:border-orange-400" type="password" placeholder="Enter your password"/>
+                <Field name="password" id="password" v-model="variables.password" :class="{'border-red-600':errors.password}"  class="w-full   content-center   text-base   px-4   py-2   border border-gray-300   rounded-lg focus:outline-none focus:border-orange-400" type="password" placeholder="Enter your password"/>
                 <span class="text-sm text-red-600">{{errors.password}}</span>
               </div>
               <div class="space-y-1 flex flex-col">
                 <label  class="text-lg font-medium text-gray-700 tracking-wide" >confirm </label>
-                <Field name="confirm"  :class="{'border-red-600':errors.confirm}"  class="w-full content-center text-base   px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400" type="password" placeholder="confirm your password"/>
+                <Field name="confirm"  id="confirm-password" :class="{'border-red-600':errors.confirm}"  class="w-full content-center text-base   px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400" type="password" placeholder="confirm your password"/>
                 <span class="text-sm text-red-600">{{errors.confirm}}</span>
               </div>
 

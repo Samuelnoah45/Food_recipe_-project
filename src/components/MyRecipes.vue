@@ -9,8 +9,9 @@ import {
 import {
     useUserStore
 } from '../store/userInfo';
-import myRecipes from '../graphql/query/myRecipes.gql'
+// import myRecipes from '../graphql/query/myRecipes.gql'
 import card from '../components/card.vue'
+import { gql } from "graphql-tag"
 
 const userStore = useUserStore();
 const user_id = ref(userStore.user.userId)
@@ -18,11 +19,36 @@ const user_id = ref(userStore.user.userId)
 const {
     result,
     onError
-} = useQuery(myRecipes, () => ({
+} = useQuery(gql`query food($offset: Int, $limit: Int,$id:uuid!) {
+  food(offset: $offset, limit: $limit where: {user_id: {_eq: $id}}) {
+    id
+    category
+    title
+    duration
+    food_user {
+      name
+    }
+    food_ratings_aggregate {
+      aggregate {
+        avg {
+          rating
+        }
+      }
+    }
+      food_images {
+      url
+    }
+  }
+
+}`, () => ({
 
     id: userStore.user.userId
 
-}))
+}),
+() =>({
+    enabled:false
+})
+)
 console.log(user_id.value);
 console.log(result);
 
