@@ -1,32 +1,39 @@
 import { beforeEach ,describe, it, expect ,test ,vi} from 'vitest'
 
-import { mount ,shallowMount  } from '@vue/test-utils'
-import { createTestingPinia } from '@pinia/testing'
+import { mount   } from '@vue/test-utils'
 import signup from '../NavBar.vue'
 import { createPinia } from 'pinia';
-import { provide ,createApp } from "vue";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "../../../apollo/config";
+import { createRouter ,createWebHistory} from 'vue-router';
+import { routes } from "../../router/index";
 
+const router = createRouter({
+  history: createWebHistory(),
+  routes: routes,
+})
 
-// localVue.use(require("@vue/composition-api").default);
-
+const provide = {
+  [DefaultApolloClient]: apolloClient,
+};
 describe('RegistrationForm', () => {
   let pinia;
-  let localVue;
-  beforeEach(() => {
-    pinia = createPinia();
-  })
-  
 
+  beforeEach( async () => {
+    pinia = createPinia();
+
+  })
   it('class name test', async () => {
+
     const wrapper = mount(signup ,{
       global: {
-        plugins: [pinia],
-        provide:{}
+        plugins: [pinia ,router],
+        provide,
+       
+        
       },
     });
-   
+    
   expect(wrapper.classes()).toContain('app_nav')
   expect(wrapper.classes('app_nav')).toBe(true)
   expect(wrapper.classes('not-existing')).toBe(false)
@@ -36,11 +43,18 @@ describe('RegistrationForm', () => {
 
 
   test('attributes', () => {
-    const wrapper = mount(signup)
+    const wrapper = mount(signup ,{
+      global: {
+        // stubs: ['RouterLink','RouterView'],
+        plugins: [pinia ,router],
+        provide,
+      },
+    });
     expect(wrapper.attributes('id')).toBe('navbar')
     expect(wrapper.attributes('class')).toBe('fixed z-20 w-full app_nav')
   })
 
+ 
 
 
 });

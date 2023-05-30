@@ -45,19 +45,15 @@ const {
     id: userStore.user.userId
 
 }),
-() =>({
-    enabled:false
-})
+
 )
-console.log(user_id.value);
-console.log(result);
+
 
 onError((error => {
-    console.log(error)
+    // console.log(error)
 
 }))
 const recipes = computed(() => result.value?.food ?? [])
-console.log(recipes)
 
 </script>
 

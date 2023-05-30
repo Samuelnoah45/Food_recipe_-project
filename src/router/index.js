@@ -122,5 +122,5 @@ const router = createRouter({
 //     return { name:'profile' }
 //   }
 // })
-
+export { routes };
 export default router

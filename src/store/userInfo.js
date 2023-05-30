@@ -3,7 +3,7 @@ import { ref } from 'vue';
 // import { set } from 'pinia/node_modules/vue-demi';
 export const useUserStore = defineStore('userStore', ()=>{
   
-  const  user=ref( {
+  const  user=ref({
           name: "",
           email: "",
           image:"",
@@ -34,6 +34,10 @@ function reset()
           user.value.email = "";
           user.value.name = "";
           user.value.active = false;
+          user.value.userId=0
+          user.value.pageNumber = 1
+          user.value.image=""
+          user.value.active=false
 
     }
   function  setActiveBtn(btn)

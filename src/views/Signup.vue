@@ -98,6 +98,7 @@ onError (()=>{
         <div class="flex justify-center self-center z-10">
           <div class="p-8 bg-white mx-auto w-96 rounded-3xl w-100">
             <div class="mb-4">
+              signup
               <h3 class="font-semibold text-2xl text-gray-800">Sign up</h3>
               <p class="text-gray-500">Please fill the from to register.</p>
             </div>

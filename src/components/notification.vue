@@ -7,7 +7,7 @@ const { dismis, notification } = useNotify();
 
 <template>
   <!-- Global notification live region, render this permanently at the end of the document -->
-
+  
   <div
     aria-live="assertive"
     class="
@@ -22,6 +22,7 @@ const { dismis, notification } = useNotify();
       sm:p-6 sm:items-start
     "
   >
+ 
     <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
       <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
       <transition

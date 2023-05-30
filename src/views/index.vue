@@ -20,7 +20,6 @@ let varibales = ref({
 var option={
     fetchPolicy: "network-only" 
 }
-console.log(userStore.user);
 const {result,onResult,loading,onError,variables,fetchMore} = useQuery(allfoods, () => ({
     offset: userStore.user.pageNumber * 12 - 12,
     limit: 12
@@ -38,7 +37,6 @@ onResult(({
 
 });
 onError((err) => {
-    console.log(err);
 });
 
 const onClickHandler = (page) => {
@@ -73,7 +71,6 @@ onBeforeRouteLeave((to, from) => {
 
 const searchRecipes = () =>
 {
-    console.log(searchQuery.value);
    router.push({name:"search" ,query:{search:searchQuery.value}})
 
     
@@ -118,16 +115,16 @@ const searchRecipes = () =>
         </div>
     </div>
     <div v-else class="relative md:-top-64  -top-52 flex flex-col  items-center w-full">
-        
+             sky
              <div class="cook md:text-3xl text-xl mb-10 font-sans font-extrabold text-black">WHAT TO COOK TODAY</div>
         <div class="w-full flex justify-center">
            <div class="homeCard md:grid-cols-3 md:grid   md:col-start-2 md:col-end-6 ">
-               <Card  class="m-6 flex-shrink-0" v-for="food in   result.food" :key="food" :food="food" ></Card>
+               <!-- <Card  class="m-6 flex-shrink-0" v-for="food in   result.food" :key="food" :food="food" ></Card> -->
            </div>
            
         </div>
         <div>
-            <vue-awesome-paginate class="self-center  m-4 mt-6" :total-items="result.food_aggregate.aggregate.count" :items-per-page="12" :max-pages-shown="7" :current-page="userStore.user.pageNumber" :on-click="onClickHandler" />
+            <!-- <vue-awesome-paginate class="self-center  m-4 mt-6" :total-items="result.food_aggregate.aggregate.count" :items-per-page="12" :max-pages-shown="7" :current-page="userStore.user.pageNumber" :on-click="onClickHandler" /> -->
         </div>
     </div>
     <Footer></Footer>

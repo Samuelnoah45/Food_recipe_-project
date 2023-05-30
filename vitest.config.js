@@ -3,12 +3,16 @@ import { mergeConfig } from 'vite'
 import { configDefaults, defineConfig } from 'vitest/config'
 import viteConfig from './vite.config'
 import Vue from '@vitejs/plugin-vue'
+import graphql from '@rollup/plugin-graphql'
+
 export default mergeConfig(
   viteConfig,
   defineConfig({
     plugins: [
       Vue(),
+      graphql(),
     ],
+    
   
     test: {
       globals: true,

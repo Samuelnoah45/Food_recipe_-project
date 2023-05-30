@@ -57,7 +57,7 @@ router.push({path:'/profile'})
             <div class="flex  flex-g text-md ">
                
                 <div class="ml-6 self-center font-sans font-bold text-2xl text-orange-600"><span>
-                        <router-link to="/">SkyRecipe <i class="fa-solid fa-utensils"></i></router-link>
+                        <router-link   to="/">SkyRecipe <i class="fa-solid fa-utensils"></i></router-link>
                     </span>
                 </div>
             </div>
@@ -68,7 +68,7 @@ router.push({path:'/profile'})
                         <slot></slot>
                     </li>
                     <li v-if="!userInfo.user.active">
-                        <router-link to="/signup">sign up</router-link>
+                        <router-link id="signup" to="/signup">sign up</router-link>
                     </li>
                     <li v-if="!userInfo.user.active">
                         <router-link to="/login">sign in</router-link>
