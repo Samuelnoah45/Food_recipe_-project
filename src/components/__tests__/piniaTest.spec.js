@@ -1,11 +1,9 @@
-import { mount ,vi } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia  ,setActivePinia} from 'pinia'
 import { routes } from "../../router/index";
 import { useUserStore } from '../../store/userInfo';
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "../../../apollo/config";
-import textField from '../../components/inputs/h-text-field.vue'
 import { describe } from 'vitest';
 
 

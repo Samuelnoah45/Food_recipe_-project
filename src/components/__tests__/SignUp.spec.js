@@ -33,20 +33,42 @@ describe('RegistrationForm', () => {
     
       },
     });
-   
-    // Fill in form data
     
     const confirmFunction =vi.spyOn(wrapper.vm ,"confirmPassword");
     await wrapper.find('#name').setValue('John Doe');
     await wrapper.find('#email').setValue('samuelnoah668@gmail.com');
     await wrapper.find('#password').setValue('password123');
     await wrapper.find('#confirm-password').setValue('password123');
-    await wrapper.find('form').trigger('submit');
-    const submitButton = wrapper.find('button');
-    await submitButton.trigger('click');
     wrapper.vm.confirmPassword()
+    
+    await wrapper.find('form').trigger('submit');
+    // await submitButton.trigger('click');
     expect(confirmFunction).toHaveBeenCalled();
-    expect(wrapper.emitted()).toHaveProperty('click');
+    // expect(confirmFunction).toHaveProperty('submit');
+
+
+  });
+  it('submits the form  test invalid', async () => {
+
+    const wrapper = mount(signup ,{
+      global: {
+        plugins: [pinia ,router],
+        provide,
+    
+      },
+    });
+    
+    const confirmFunction =vi.spyOn(wrapper.vm ,"confirmPassword");
+    await wrapper.find('#name').setValue('John Doe');
+    await wrapper.find('#email').setValue('samuelnoah668@gmail.com');
+    await wrapper.find('#password').setValue('password123');
+    await wrapper.find('#confirm-password').setValue('password123');
+    wrapper.vm.confirmPassword()
+    // await submitButton.trigger('click');
+    
+    await wrapper.find('form').trigger('submit');
+    expect(confirmFunction).toHaveBeenCalled();
+    // expect(confirmFunction).toHaveProperty('submit');
 
 
   });

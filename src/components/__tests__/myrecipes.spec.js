@@ -1,9 +1,9 @@
 import { beforeEach ,describe, it, expect ,test ,vi} from 'vitest'
 
-import { mount ,shallowMount  } from '@vue/test-utils'
-import myRecipes from '../MyRecipes.vue'
+import { mount   } from '@vue/test-utils'
+import home from '../ProvideComp.vue'
+import card from '../injectComp.vue'
 import { createPinia } from 'pinia';
-import { createApp } from "vue";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "../../../apollo/config";
 
@@ -24,14 +24,16 @@ describe('myRecipes component', () => {
   
 
   it('check some component  is inside page ', async () => {
-    const wrapper = mount(myRecipes ,{
+    const wrapper = mount(home ,{
       global: {
         plugins: [pinia],
         provide
       },
     });
     // test  page  includes  card component
-    wrapper.findComponent({name:"card"})
+    const cards = wrapper.findComponent(card) // => finds Bar by component instance
+    expect(cards.exists()).toBe(true)
+    
 
 
   });

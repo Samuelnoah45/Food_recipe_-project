@@ -24,8 +24,6 @@ const provide = {
 
   test('provides correct data', () => {
     //  defineComponent in vite is not working
-
-   
   
     const wrapper = mount(parent, {
       global: {

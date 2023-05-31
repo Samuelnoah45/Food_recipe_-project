@@ -1,7 +1,7 @@
 import { beforeEach ,describe, it, expect ,test ,vi} from 'vitest'
 
 import { mount   } from '@vue/test-utils'
-import signup from '../NavBar.vue'
+import nav from '../NavBar.vue'
 import { createPinia } from 'pinia';
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "../../../apollo/config";
@@ -25,7 +25,7 @@ describe('RegistrationForm', () => {
   })
   it('class name test', async () => {
 
-    const wrapper = mount(signup ,{
+    const wrapper = mount(nav ,{
       global: {
         plugins: [pinia ,router],
         provide,
@@ -43,7 +43,7 @@ describe('RegistrationForm', () => {
 
 
   test('attributes', () => {
-    const wrapper = mount(signup ,{
+    const wrapper = mount(nav ,{
       global: {
         // stubs: ['RouterLink','RouterView'],
         plugins: [pinia ,router],
