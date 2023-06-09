@@ -115,10 +115,10 @@ const searchRecipes = () =>
         </div>
     </div>
     <div v-else class="relative md:-top-64  -top-52 flex flex-col  items-center w-full">
-             sky
+          
              <div class="cook md:text-3xl text-xl mb-10 font-sans font-extrabold text-black">WHAT TO COOK TODAY</div>
-        <div class="w-full flex justify-center">
-           <div class="homeCard md:grid-cols-3 md:grid   md:col-start-2 md:col-end-6 ">
+        <div class="w-full flex justify-center ">
+           <div class="homeCard md:grid-cols-4 md:grid   md:col-start-2 md:col-end-6 ">
                <Card  class="m-6 flex-shrink-0" v-for="food in   result.food" :key="food" :food="food" ></Card>
            </div>
            
@@ -132,7 +132,7 @@ const searchRecipes = () =>
 </template>
 <style>
 .homeCard{
-    width:1000px
+    width:1300px
 
 }
 .home {

@@ -62,15 +62,15 @@ onBeforeRouteLeave((to, from) => {
                            <span class="text-2xl self-center"><i class="fa-solid fa-plus"></i></span>
                         <span class="md:text-lg md:min-w-full text-xs">Add Recipe</span>
                     </button>
-                    <button @click="comp=popup, userStore.setActiveBtn('btn4')" :class="{active:  userStore.profile.active === 'btn4' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600" to="">
+                    <!-- <button @click="comp=popup, userStore.setActiveBtn('btn4')" :class="{active:  userStore.profile.active === 'btn4' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600" to="">
                         <span class="text-2xl self-center"><i class="fa-solid fa-bookmark"></i></span>
                         <span class="md:text-lg md:min-w-full text-xs">Saved Recipes </span>
-                    </button>
+                    </button> -->
 
-                    <button @click="comp=AddRecipe ,userStore.setActiveBtn('btn5')" :class="{active: userStore.profile.active=== 'btn5' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600" to="">
+                    <!-- <button @click="comp=AddRecipe ,userStore.setActiveBtn('btn5')" :class="{active: userStore.profile.active=== 'btn5' }" class="md:text-lg md:min-w-full md:font-bold md:flex-row flex-col py-3 flex justify-start md:pl-10 p-1 space-x-4 md:border-t-2 border-y-2 border-gray-300h hover:bg-gray-300 hover:text-orange-600" to="">
                         <span class="text-2xl self-center"><i class="fa-solid fa-bell"></i></span>
                         <span class="md:text-lg md:min-w-full text-xs">Notification</span>
-                    </button>
+                    </button> -->
                  
 
                 </div>

@@ -182,6 +182,7 @@ const submit = () =>
     }
 
 const mainImage = (index) => {
+
     const temp = variables.value.image[index];
     variables.value.image[index] = variables.value.image[0]
     variables.value.image[0] = temp;
@@ -238,7 +239,7 @@ const schema = Yup.object().shape({
 
         <div class="flex-1 space-y-10">
             <div class="flex flex-col">
-                <label for="name">Duration in min *</label>
+                <label for="name">cooking time (in min) *</label>
                 <Field name="duration" :class="{ 'border-red-600': errors.duration }"  class="border-2 p-2 border-gray-300" type="number" v-model="food.duration"/>
                 <span>{{errors.duration}}</span>
             </div>
