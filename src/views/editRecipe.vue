@@ -91,18 +91,19 @@ onDetailResult((result)=>{
     food.value.category=result.data.food[0].category,
     food.value.description=result.data.food[0].description,
     food.value.duration=result.data.food[0].duration,
-    variables.value.image=result.data.food[0].images
-    ingredients2.value=result.data.food[0].Ingredients
-    steps2.value=result.data.food[0].steps
+    variables.value.image=result.data.food[0].food_images
+    ingredients2.value=result.data.food[0].food_Ingredients
+    steps2.value=result.data.food[0].food_steps
+    // console.log();
   
     const  ingObj={ where: {Ingredient_id: {_eq: 1}}, _set:{ingredient_name:""}}
     const  ingObj2={ where: {id: {_eq: 1}}, _set:{ instruction:"" ,stepNumber:""}}
 
-    for(var i=0;i<result.data.food[0].Ingredients.length;i++){
-    ingObj.where.Ingredient_id._eq=result.data.food[0].Ingredients[i].Ingredient_id
-    ingObj._set.ingredient_name=result.data.food[0].Ingredients[i].ingredient_name
-    ingObj._set.amount=result.data.food[0].Ingredients[i].amount
-    ingObj._set.unit=result.data.food[0].Ingredients[i].unit
+    for(var i=0;i<result.data.food[0].food_Ingredients.length;i++){
+    ingObj.where.Ingredient_id._eq=result.data.food[0].food_Ingredients[i].Ingredient_id
+    ingObj._set.ingredient_name=result.data.food[0].food_Ingredients[i].ingredient_name
+    ingObj._set.amount=result.data.food[0].food_Ingredients[i].amount
+    ingObj._set.unit=result.data.food[0].food_Ingredients[i].unit
     ingredients.value.push(ingObj)
 
     }
@@ -208,11 +209,11 @@ const ingName=function(index,value){
 
 
 }
-const schema = Yup.object().shape({
-    title: Yup.string().required('Title is required'),
-    duration: Yup.number("duration must be number").min(1,"duration must be greater than 1")
+// const schema = Yup.object().shape({
+//     title: Yup.string().required('Title is required'),
+//     duration: Yup.number("duration must be number").min(1,"duration must be greater than 1")
    
-});
+// });
 </script>
 <template>
    
@@ -295,14 +296,14 @@ const schema = Yup.object().shape({
                         </div>
                     </div>
                 </div>
-                <!-- <div>
+                <div>
                     <label class="text-xl font-extrabold">
                         <span class="bg-gray-300 rounded p-2"><i class="text-orange-600 font-bold fa-solid fa-plus"></i> Add
                         </span>
                         <input @change="handleImage" class="opacity-0" ref="file" type="file" accept="image/*" multiple name="" id="">
                     </label>
                     <span class="font-bold">Click image  to make it main</span>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
